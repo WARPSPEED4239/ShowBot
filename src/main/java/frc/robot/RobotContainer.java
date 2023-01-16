@@ -2,9 +2,8 @@ package frc.robot;
 
 import com.ctre.phoenix.CANifier;
 
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ConditionalCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -12,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentOutputWithController;
 import frc.robot.commands.CannonFiringSolenoidSetState;
 import frc.robot.commands.CannonLoadingSolenoidSetState;
@@ -26,7 +25,7 @@ import frc.robot.tools.RGBController;
 import frc.robot.tools.RGBController.Color;
 
 public class RobotContainer {
-  private XboxController mXbox = new XboxController(0);
+  private CommandXboxController mXbox = new CommandXboxController(0);
   
   private final Cannon mCannon = new Cannon();
   private final CannonAngleAdjust mCannonAngleAdjust = new CannonAngleAdjust();
@@ -46,24 +45,12 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper, xButtonLeftStick,
-        xButtonRightStick;
-        
-    xButtonA = new JoystickButton(mXbox, 1);
-		xButtonB = new JoystickButton(mXbox, 2);
-		xButtonX = new JoystickButton(mXbox, 3);
-		xButtonY = new JoystickButton(mXbox, 4);
-		xButtonLeftBumper = new JoystickButton(mXbox, 5);
-		xButtonRightBumper = new JoystickButton(mXbox, 6);
-		xButtonLeftStick = new JoystickButton(mXbox, 9);
-    xButtonRightStick = new JoystickButton(mXbox, 10);
-    
-    xButtonA.whenPressed(new ConditionalCommand(cannonFire(), new InstantCommand(), () -> mCannon.getFiringTankPressure() >= 80.0));
-    xButtonB.whenPressed(new CannonRevolve(mCannon, 8, 1.0));
-    xButtonX.whenPressed(new CannonRevolve(mCannon, 8, -1.0));
+    mXbox.a().onTrue(new ConditionalCommand(cannonFire(), new InstantCommand(), () -> mCannon.getFiringTankPressure() >= 80.0));
+    mXbox.b().onTrue(new CannonRevolve(mCannon, 8, 1.0));
+    mXbox.x().onTrue(new CannonRevolve(mCannon, 8, -1.0));
 
-    xButtonLeftBumper.whenPressed(new CannonRevolve(mCannon, 1, -0.7));
-    xButtonRightBumper.whenPressed(new CannonRevolve(mCannon, 1, 0.7));
+    mXbox.leftBumper().onTrue(new CannonRevolve(mCannon, 1, -0.7));
+    mXbox.rightBumper().onTrue(new CannonRevolve(mCannon, 1, 0.7));
   }
 
   public Command cannonReloading() {
