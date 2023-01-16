@@ -2,10 +2,9 @@ package frc.robot;
 
 import com.ctre.phoenix.CANifier;
 
-import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentOutputWithController;
 import frc.robot.commands.CannonFireRevovle;
 import frc.robot.commands.CannonReloading;
@@ -19,7 +18,7 @@ import frc.robot.subsystems.Drivetrain;
 import frc.robot.tools.RGBController;
 
 public class RobotContainer {
-  private XboxController mXbox = new XboxController(0);
+  private CommandXboxController mXbox = new CommandXboxController(0);
   
   private final Cannon mCannon = new Cannon();
   private final CannonAngleAdjust mCannonAngleAdjust = new CannonAngleAdjust();
@@ -41,24 +40,12 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper, xButtonLeftStick,
-        xButtonRightStick;
-        
-    xButtonA = new JoystickButton(mXbox, 1);
-		xButtonB = new JoystickButton(mXbox, 2);
-		xButtonX = new JoystickButton(mXbox, 3);
-		xButtonY = new JoystickButton(mXbox, 4);
-		xButtonLeftBumper = new JoystickButton(mXbox, 5);
-		xButtonRightBumper = new JoystickButton(mXbox, 6);
-		xButtonLeftStick = new JoystickButton(mXbox, 9);
-    xButtonRightStick = new JoystickButton(mXbox, 10);
-    
-    xButtonA.whenPressed(new CannonFireRevovle(mCannon, mCannonRevolve));
-    xButtonB.whenPressed(new CannonRevolveSpin(mCannonRevolve, 8, 1.0));
-    xButtonX.whenPressed(new CannonRevolveSpin(mCannonRevolve, 8, -1.0));
+    mXbox.a().onTrue(new CannonFireRevovle(mCannon, mCannonRevolve));
+    mXbox.b().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, 1.0));
+    mXbox.x().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, -1.0));
 
-    xButtonLeftBumper.whenPressed(new CannonRevolveSpin(mCannonRevolve, 1, -0.75));
-    xButtonRightBumper.whenPressed(new CannonRevolveSpin(mCannonRevolve, 1, 0.75));
+    mXbox.leftBumper().whileTrue(new CannonRevolveSpin(mCannonRevolve, 1, -0.75));
+    mXbox.rightBumper().whileTrue(new CannonRevolveSpin(mCannonRevolve, 1, 0.75));
   }
 
   public RGBController getRGBController() {
