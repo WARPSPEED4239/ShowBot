@@ -4,8 +4,7 @@ package frc.robot;
 
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentOutputWithController;
 import frc.robot.commands.CannonFiringSolenoidSetState;
 import frc.robot.commands.CannonLoadingSolenoidSetState;
@@ -17,7 +16,7 @@ import frc.robot.subsystems.CannonRevolve;
 import frc.robot.subsystems.Drivetrain;
 
 public class RobotContainer {
-  private XboxController mXbox = new XboxController(0);
+  private CommandXboxController mXbox = new CommandXboxController(0);
   
   private final Cannon mCannon = new Cannon();
   private final CannonRevolve mCannonRevolve = new CannonRevolve();
@@ -39,24 +38,12 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton xButtonA, xButtonB, xButtonX, xButtonY, xButtonLeftBumper, xButtonRightBumper, xButtonLeftStick,
-        xButtonRightStick;
-        
-    xButtonA = new JoystickButton(mXbox, 1);
-		xButtonB = new JoystickButton(mXbox, 2);
-		xButtonX = new JoystickButton(mXbox, 3);
-		xButtonY = new JoystickButton(mXbox, 4);
-		xButtonLeftBumper = new JoystickButton(mXbox, 5);
-		xButtonRightBumper = new JoystickButton(mXbox, 6);
-		xButtonLeftStick = new JoystickButton(mXbox, 9);
-    xButtonRightStick = new JoystickButton(mXbox, 10);
+    mXbox.a().whileTrue(new CannonFiringSolenoidSetState(mCannon, true));
+    mXbox.b().onTrue(new CannonLoadingSolenoidSetState(mCannon, true));
+    mXbox.y().onTrue(new CannonLoadingSolenoidSetState(mCannon, false));
 
-    xButtonA.whileHeld(new CannonFiringSolenoidSetState(mCannon, true));    
-    xButtonB.whenPressed(new CannonLoadingSolenoidSetState(mCannon, true));
-    xButtonY.whenPressed(new CannonLoadingSolenoidSetState(mCannon, false));
-
-    xButtonLeftBumper.whileHeld(new CannonRevolveSetPercentOutput(mCannonRevolve, -0.75));
-    xButtonRightBumper.whileHeld(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.75));
+    mXbox.leftBumper().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, -0.75));
+    mXbox.rightBumper().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.75));
 
     // xButtonA.whenPressed(new ConditionalCommand(new ConditionalCommand(cannonFire(), new CannonRevolveSpin(mCannonRevolve, 1, -0.4), () -> mCannonRevolve.getRevolveLimitSwitch()), new InstantCommand(), () -> mCannon.getFiringTankPressure() >= MIN_FIRING_PSI));
     // xButtonB.whenPressed(new CannonRevolveSpin(mCannonRevolve, 8, 1.0));
