@@ -29,8 +29,7 @@ public class DrivetrainArcadeDrive extends CommandBase {
       rotate = -0.85;
     }
     
-    //for anyone who sees this- I have no idea why I had to flip these it just stopped working and it fixed it somehow. I still don't understand what the problem is >:(
-    mDrivetrain.arcadeDrive(rotate, move);
+    mDrivetrain.arcadeDrive(move, rotate);
   }
 
   @Override
