@@ -19,7 +19,7 @@ public class DrivetrainArcadeDrive extends CommandBase {
 
   @Override
   public void execute() {
-    double move = mXbox.getRightTriggerAxis() - mXbox.getLeftTriggerAxis();
+    double move = -mXbox.getRightTriggerAxis() + mXbox.getLeftTriggerAxis();
     double rotate = (.533333 * Math.pow(mXbox.getLeftX(), 3) + .466666 *  mXbox.getLeftX());
 
     if (rotate > 0.85){
