@@ -44,8 +44,8 @@ public class RobotContainer {
     mXbox.b().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, 1.0));
     mXbox.x().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, -1.0));
 
-    mXbox.leftBumper().whileTrue(new CannonRevolveSpin(mCannonRevolve, 1, -0.75));
-    mXbox.rightBumper().whileTrue(new CannonRevolveSpin(mCannonRevolve, 1, 0.75));
+    mXbox.leftBumper().onTrue(new CannonRevolveSpin(mCannonRevolve, 1, -0.5));
+    mXbox.rightBumper().onTrue(new CannonRevolveSpin(mCannonRevolve, 1, 0.5));
   }
 
   public RGBController getRGBController() {

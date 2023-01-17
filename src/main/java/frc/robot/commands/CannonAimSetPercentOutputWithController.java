@@ -19,7 +19,7 @@ public class CannonAimSetPercentOutputWithController extends CommandBase {
 
   @Override
   public void execute() {
-    double mOutput = mXbox.getRawAxis(5) * 0.5;
+    double mOutput = mXbox.getRawAxis(5);
 
     if (mOutput < 0.05 && mOutput > -0.05) {
       mCannonAngleAdjust.setPercentOutput(0.0);
