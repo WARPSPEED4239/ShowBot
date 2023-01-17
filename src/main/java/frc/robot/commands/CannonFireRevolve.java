@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
 
-public class CannonFireRevovle extends CommandBase {
+public class CannonFireRevolve extends CommandBase {
 
   private final Cannon mCannon;
   private final CannonRevolve mCannonRevolve;
@@ -30,7 +30,7 @@ public class CannonFireRevovle extends CommandBase {
     END_POSITION
   }
 
-  public CannonFireRevovle(Cannon cannon, CannonRevolve cannonRevolve) {
+  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve) {
     mCannon = cannon;
     mCannonRevolve = cannonRevolve;
     updateState(State.UNITIALIZED);
