@@ -6,7 +6,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentOutputWithController;
-import frc.robot.commands.CannonFireRevovle;
+import frc.robot.commands.CannonFireRevolve;
 import frc.robot.commands.CannonReloading;
 import frc.robot.commands.CannonRevolveSetPercentOutput;
 import frc.robot.commands.CannonRevolveSpin;
@@ -40,7 +40,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    mXbox.a().onTrue(new CannonFireRevovle(mCannon, mCannonRevolve));
+    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve));
     mXbox.b().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, 1.0));
     mXbox.x().onTrue(new CannonRevolveSpin(mCannonRevolve, 8, -1.0));
 
