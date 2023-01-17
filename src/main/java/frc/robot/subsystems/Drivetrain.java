@@ -25,6 +25,9 @@ public class Drivetrain extends SubsystemBase {
     rightMaster.restoreFactoryDefaults();
     rightSlave.restoreFactoryDefaults();
 
+    rightMaster.setInverted(true);
+    rightSlave.setInverted(true);
+
 		leftSlave.follow(leftMaster);
 		rightSlave.follow(rightMaster);
     
