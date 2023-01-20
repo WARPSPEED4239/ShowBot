@@ -1,6 +1,6 @@
 package frc.robot;
 
-import com.ctre.phoenix.CANifier;
+import com.ctre.phoenix.led.CANdle;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -24,7 +24,7 @@ public class RobotContainer {
   private final CannonAngleAdjust mCannonAngleAdjust = new CannonAngleAdjust();
   private final CannonRevolve mCannonRevolve = new CannonRevolve();
   private final Drivetrain mDrivetrain = new Drivetrain();
-  private final RGBController mRGBController = new RGBController(new CANifier(Constants.CANIFIER));
+  private final RGBController mRGBController = new RGBController(new CANdle(Constants.CANDLE));
 
   public RobotContainer() {
     mCannon.setDefaultCommand(new CannonReloading(mCannon, mRGBController));

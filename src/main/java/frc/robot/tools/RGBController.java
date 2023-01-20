@@ -3,21 +3,15 @@ package frc.robot.tools;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.ctre.phoenix.CANifier;
-import com.ctre.phoenix.CANifier.LEDChannel;
+import com.ctre.phoenix.led.CANdle;
 
 public class RGBController {
-
+	private CANdle mRGB;
+	private Timer mTimer;
 	private static boolean timerOn = false;
-
+	
 	public enum Color {
 		Red, Black, White, Green, Blue, Purple, RedDim, WhiteDim, GreenDim, PurpleDim
-	}
-
-	private CANifier mRGB;
-	private Timer mTimer;
-
-	class CANifer {
 	}
 
 	class ColorTask extends TimerTask {
@@ -40,7 +34,7 @@ public class RGBController {
 		}
 	}
 
-	public RGBController(CANifier rgb) {
+	public RGBController(CANdle rgb) {
 		mRGB = rgb;
 	}
 
@@ -64,59 +58,34 @@ public class RGBController {
 	public void setColorImpl(Color color) {
 		switch (color) {
 		case Red:
-			mRGB.setLEDOutput(0.6, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(153, 0, 0);
 			break;
 		case Black:
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(0, 0, 0);
 			break;
 		case White:
-			mRGB.setLEDOutput(0.5, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.5, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.5, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(128, 128, 128);
 			break;
 		case Green:
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.5, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(0, 128, 0);
 			break;
 		case Blue:
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.5, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(0, 0, 128);
 			break;
 		case Purple:
-			mRGB.setLEDOutput(1.0, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(1.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(255, 0, 255);
 			break;
 		case RedDim:
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(25, 0, 0);
 			break;
 		case WhiteDim:
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(25, 25, 25);
 			break;
 		case GreenDim:
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(0, 25, 0);
 			break;
 		case PurpleDim:
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.1, LEDChannel.LEDChannelC);
-			break;
-		default:
-			mRGB.setLEDOutput(0.6, LEDChannel.LEDChannelA);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelB);
-			mRGB.setLEDOutput(0.0, LEDChannel.LEDChannelC);
+			mRGB.setLEDs(25, 0, 25);
 			break;
 		}
 	}
