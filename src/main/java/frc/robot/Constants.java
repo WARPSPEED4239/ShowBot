@@ -7,7 +7,8 @@ public final class Constants {
                             DRIVETRAIN_MOTOR_RIGHT_2 = 5,
 
                             CANNON_ANGLE_ADJUST_MOTOR = 3,
-                            CANNON_REVOLVE_MOTOR = 6,
+
+                            CANNON_REVOLVE_MOTOR = 6, // TALON SRX
                             
                             CANIFIER = 1;
 
