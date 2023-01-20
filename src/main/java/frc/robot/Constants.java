@@ -8,9 +8,7 @@ public final class Constants {
 
                             CANNON_ANGLE_ADJUST_MOTOR = 3,
 
-                            CANNON_REVOLVE_MOTOR = 6, // TALON SRX
-                            
-                            CANIFIER = 1;
+                            CANNON_REVOLVE_MOTOR = 6; // TALON SRX
 
     public static final int CANNON_REVOLVE_LIMIT_SWITCH = 0; //DIO
 
