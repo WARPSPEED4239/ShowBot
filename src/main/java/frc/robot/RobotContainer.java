@@ -1,7 +1,5 @@
 package frc.robot;
 
-import com.ctre.phoenix.led.CANdle;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -15,7 +13,6 @@ import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonAngleAdjust;
 import frc.robot.subsystems.CannonRevolve;
 import frc.robot.subsystems.Drivetrain;
-import frc.robot.tools.RGBController;
 
 public class RobotContainer {
   private CommandXboxController mXbox = new CommandXboxController(0);
@@ -24,10 +21,10 @@ public class RobotContainer {
   private final CannonAngleAdjust mCannonAngleAdjust = new CannonAngleAdjust();
   private final CannonRevolve mCannonRevolve = new CannonRevolve();
   private final Drivetrain mDrivetrain = new Drivetrain();
-  private final RGBController mRGBController = new RGBController(new CANdle(Constants.CANDLE));
+  // private final RGBController mRGBController = new RGBController(new CANdle(Constants.CANDLE));
 
   public RobotContainer() {
-    mCannon.setDefaultCommand(new CannonReloading(mCannon, mRGBController));
+    mCannon.setDefaultCommand(new CannonReloading(mCannon/*, mRGBController*/));
     mCannonAngleAdjust.setDefaultCommand(new CannonAimSetPercentOutputWithController(mCannonAngleAdjust, mXbox));
     mCannonRevolve.setDefaultCommand(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.0));
     mDrivetrain.setDefaultCommand(new DrivetrainArcadeDrive(mDrivetrain, mXbox));
@@ -48,7 +45,7 @@ public class RobotContainer {
     mXbox.rightBumper().onTrue(new CannonRevolveSpin(mCannonRevolve, 1, 0.5));
   }
 
-  public RGBController getRGBController() {
+  /*public RGBController getRGBController() {
     return mRGBController;
-  }
+  }*/
 }
