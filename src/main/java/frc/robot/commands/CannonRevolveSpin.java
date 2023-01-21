@@ -1,47 +1,28 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpin extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private final double mPercentOutput;
-  private int mNumberOfBarrelsAdvanced;
-  private boolean waitingForLimit;
 
-  public CannonRevolveSpin(CannonRevolve cannonRevolve, int targetNumberOfBarrels, double percentOutput) {
+  public CannonRevolveSpin(CannonRevolve cannonRevolve, int targetNumberOfBarrels) {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
-    mPercentOutput = percentOutput;
     addRequirements(mCannonRevolve);
   }
 
   @Override
   public void initialize() {
-    mNumberOfBarrelsAdvanced = 0;
-    
-    if (mCannonRevolve.getRevolveLimitSwitch()) {
-      waitingForLimit = false;
-    } else {
-      waitingForLimit = true;
-    }
   }
 
   @Override
   public void execute() {
-    mCannonRevolve.setPercentOutput(mPercentOutput);
-
-    if (waitingForLimit) {
-      if (mCannonRevolve.getRevolveLimitSwitch()) {
-        mNumberOfBarrelsAdvanced++;
-        waitingForLimit = false;
-      }
-    } else {
-      if (!mCannonRevolve.getRevolveLimitSwitch()) {
-        waitingForLimit = true;
-      }
-    }
+    SmartDashboard.putNumber("Revolve Target Position", (Constants.SRX_COUNTS_PER_REV / 8) * mTargetNumberOfBarrels);
+    mCannonRevolve.setPosition(mTargetNumberOfBarrels);
   }
 
   @Override
@@ -51,10 +32,6 @@ public class CannonRevolveSpin extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (mNumberOfBarrelsAdvanced == mTargetNumberOfBarrels) {
-      return true;
-    } else {
-      return false;
-    }
+    return false;
   }
 }
