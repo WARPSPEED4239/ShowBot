@@ -20,6 +20,7 @@ public class CannonRevolve extends SubsystemBase {
 
   private final WPI_TalonSRX revolveMotor = new WPI_TalonSRX(Constants.CANNON_REVOLVE_MOTOR);
   private final DigitalInput revolveLimitSwitch = new DigitalInput(Constants.CANNON_REVOLVE_LIMIT_SWITCH);
+  private double maxVelocity = 0.0;
   
   public CannonRevolve() {
     revolveMotor.configFactoryDefault();
@@ -60,6 +61,11 @@ public class CannonRevolve extends SubsystemBase {
     SmartDashboard.putNumber("REVOLVE Output %", revolveMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("REVLOVE POSITION", getPosition(false));
     SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
+
+    if (Math.abs(getVelocity(false)) > maxVelocity) {
+      maxVelocity = Math.abs(getVelocity(false));
+    }
+    SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
   }
 
   public void setPercentOutput(double output) {
