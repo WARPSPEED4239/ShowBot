@@ -17,12 +17,17 @@ public class CannonRevolveSpin extends CommandBase {
 
   @Override
   public void initialize() {
+    int ticksPerBarrel= Constants.SRX_COUNTS_PER_REV / 8;
+    double currentBarrelPosition = ticksPerBarrel * Math.round(mCannonRevolve.getPosition(false) / ticksPerBarrel);
+    int targetToPrint = (int) currentBarrelPosition + (ticksPerBarrel * mTargetNumberOfBarrels);
+    SmartDashboard.putNumber("Revolve Target Position", targetToPrint);
+
+    mCannonRevolve.setPosition(mTargetNumberOfBarrels);
+
   }
 
   @Override
   public void execute() {
-    SmartDashboard.putNumber("Revolve Target Position", (Constants.SRX_COUNTS_PER_REV / 8) * mTargetNumberOfBarrels);
-    mCannonRevolve.setPosition(mTargetNumberOfBarrels);
   }
 
   @Override

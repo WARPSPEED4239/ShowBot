@@ -22,7 +22,7 @@ public final class Constants {
 
     public static final int SRX_COUNTS_PER_REV = 4096,
                             SRX_FULL_OUTPUT = 1023,
-                            SRX_BARREL_OFFSET = 0; // TODO: FIND OFFSET
+                            SRX_BARREL_OFFSET = 3;
 
     public static final double EPSILON = 0.0001,
                                MIN_FIRING_PRESSURE = 75.0,
