@@ -50,7 +50,7 @@ public class CannonRevolve extends SubsystemBase {
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
     revolveMotor.config_kP(0,15.0);
-    revolveMotor.config_kI(0, 0.0);
+    revolveMotor.config_kI(0, 0.1);
     revolveMotor.config_kD(0, 1.5);
   }
 
