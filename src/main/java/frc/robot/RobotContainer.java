@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentOutputWithController;
 import frc.robot.commands.CannonReloading;
 import frc.robot.commands.CannonRevolveSetPercentOutput;
-import frc.robot.commands.CannonRevolveSpinTillLimit;
+import frc.robot.commands.CannonRevolveSpinLimit;
 import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonAngleAdjust;
@@ -36,17 +36,14 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    //mXbox.leftBumper().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, -1.0));
-    //mXbox.rightBumper().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, 1.0));
-
-    mXbox.x().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, -0.4));
-    mXbox.b().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.4));
+    mXbox.x().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, -0.5));
+    mXbox.b().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.5));
     // mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve));
-    // mXbox.x().onTrue(new CannonRevolveSpin(mCannonRevolve, -8));
-    // mXbox.b().onTrue(new CannonRevolveSpin(mCannonRevolve, 8));
+    // mXbox.x().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -8, -0.4));
+    // mXbox.b().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 8, 0.4));
 
-    mXbox.leftBumper().onTrue(new CannonRevolveSpinTillLimit(mCannonRevolve, -0.4));
-    mXbox.rightBumper().onTrue(new CannonRevolveSpinTillLimit(mCannonRevolve, 0.4));
+    mXbox.leftBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -1, -0.4).withTimeout(4));
+    mXbox.rightBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 1, 0.4).withTimeout(4));
   }
 
   /*public RGBController getRGBController() {

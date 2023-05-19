@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.CannonRevolve;
 
-public class CannonRevolveSpin extends CommandBase {
+public class CannonRevolveSpinEncoder extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
 
-  public CannonRevolveSpin(CannonRevolve cannonRevolve, int targetNumberOfBarrels) {
+  public CannonRevolveSpinEncoder(CannonRevolve cannonRevolve, int targetNumberOfBarrels) {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
     addRequirements(mCannonRevolve);
