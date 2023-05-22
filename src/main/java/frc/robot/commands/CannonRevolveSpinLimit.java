@@ -59,6 +59,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
 
     if (mNumberOfBarrelsAdvanced == mTargetNumberOfBarrels) {
       mCannonRevolve.setPercentOutput(0.0);
+      mTimer.start();
       mStartTime = mTimer.get();
       mRotationStep = false;
     }
@@ -79,6 +80,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
+    mTimer.stop();
     mCannonRevolve.setPercentOutput(0.0);
   }
 
