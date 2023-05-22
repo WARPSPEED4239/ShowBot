@@ -15,7 +15,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private boolean mEnd;
 
   private double mStartTime = 0.0;
-  private final Timer mTimer = new Timer();
+  private Timer mTimer;
 
   public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, double percentOutput) {
     mCannonRevolve = cannonRevolve;
@@ -29,6 +29,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mNumberOfBarrelsAdvanced = 0;
     mRotationStep = true;
     mEnd = false;
+    mTimer = new Timer();
 
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }
