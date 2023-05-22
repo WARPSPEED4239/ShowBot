@@ -42,8 +42,8 @@ public class RobotContainer {
     mXbox.b().whileTrue(new CannonRevolveSetPercentOutput(mCannonRevolve, 0.5));
     // mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve));
     
-    mXbox.leftBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -1, -0.4).withTimeout(5.0));
-    mXbox.rightBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 1, 0.4).withTimeout(5.0));
+    mXbox.leftBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -1, -0.4).withTimeout(3.5));
+    mXbox.rightBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 1, 0.4).withTimeout(3.5));
   }
 
   /*public RGBController getRGBController() {
