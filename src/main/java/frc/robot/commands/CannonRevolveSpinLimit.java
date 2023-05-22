@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CannonRevolve;
 
@@ -63,7 +64,8 @@ public class CannonRevolveSpinLimit extends CommandBase {
   }
 
   public void correction() {
-    if ((mTimer.get() - mStartTime) > 0.25) {
+    SmartDashboard.putBoolean("Correction Time > 0.5", (mTimer.get() - mStartTime) > 0.5);
+    if ((mTimer.get() - mStartTime) > 0.5) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
