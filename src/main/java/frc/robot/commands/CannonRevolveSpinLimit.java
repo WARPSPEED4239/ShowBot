@@ -65,6 +65,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
 
   public void correction() {
     SmartDashboard.putBoolean("Correction Time > 0.5", (mTimer.get() - mStartTime) > 0.5);
+    SmartDashboard.putNumber("Time", (mTimer.get() - mStartTime));
     if ((mTimer.get() - mStartTime) > 0.5) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
