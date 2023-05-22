@@ -26,7 +26,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   @Override
   public void initialize() {
     mNumberOfBarrelsAdvanced = 0;
-    mRotationStep = false;
+    mRotationStep = true;
     mEnd = false;
 
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
