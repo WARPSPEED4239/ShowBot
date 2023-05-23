@@ -24,7 +24,7 @@ public class Cannon extends SubsystemBase {
   private final AnalogInput storagePressure = new AnalogInput(Constants.CANNON_STORAGE_PRESSURE);
   private final AnalogInput firingPressure = new AnalogInput(Constants.CANNON_FIRING_PRESSURE);
 
-  private final double DEFAULT_VOLTS = 4.52; //TODO Maybe have seperate tunes for each tank's desired PSI's
+  private final double DEFAULT_VOLTS = 4.52; //TODO Maybe have separate tunes for each tank's desired PSI's
 	private final double SLOPE = 250.0;
   private final double Y_INTERCEPT = -25.0;
   
