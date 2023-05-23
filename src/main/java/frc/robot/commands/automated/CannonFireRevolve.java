@@ -27,6 +27,7 @@ public class CannonFireRevolve extends CommandBase {
   private double mCorrectionStartTime;
 
   // private final RGBController mRGBController;
+  // private final Color[] colors = {Color.Red, Color.Black};
 
   public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, SendableChooser<Constants.Environment> envirChooser, double percentOutput/*, RGBController RGBController*/) {
     mCannon = cannon;
@@ -81,25 +82,25 @@ public class CannonFireRevolve extends CommandBase {
       } else {
         correction();
       }
-    } else if (mCannon.getFiringTankPressure() < mMinFiringPressure) {
+    } else if (mCannon.getFiringTankPressure() < mMinFiringPressure) { // Cannon not at min pressure, do not fire
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
       mEnd = true;
-    } else {
+    } else { // All conditions are met, fire
       double mElapsedTime = mTimer.get() - mStartTime;
 
       if (mElapsedTime < 1.0) {
-        // mRGBController.setColor(Color.Black);
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
+        // mRGBController.setColors(colors, 0.1);
       } else if (mElapsedTime >= 1.0 && mElapsedTime < 1.75) {
-        // mRGBController.setColor(Color.White);
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
+        // mRGBController.setColor(Color.White);
       } else {
-        // mRGBController.setColor(Color.Black);
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
+        // mRGBController.setColor(Color.Black);
         if (mRotationStep) {
           initialRotation();
         } else {
