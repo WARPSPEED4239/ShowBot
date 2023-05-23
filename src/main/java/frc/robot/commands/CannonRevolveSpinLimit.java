@@ -1,7 +1,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CannonRevolve;
 
@@ -10,12 +9,13 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private final int mTargetNumberOfBarrels;
   private final double mPercentOutput;
   private int mNumberOfBarrelsAdvanced;
+
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
   private boolean mEnd;
 
   private double mStartTime = 0.0;
-  private Timer mTimer;
+  private Timer mCorrectionTimer;
 
   public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, double percentOutput) {
     mCannonRevolve = cannonRevolve;
@@ -29,7 +29,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mNumberOfBarrelsAdvanced = 0;
     mRotationStep = true;
     mEnd = false;
-    mTimer = new Timer();
+    mCorrectionTimer = new Timer();
 
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }
@@ -59,16 +59,14 @@ public class CannonRevolveSpinLimit extends CommandBase {
 
     if (mNumberOfBarrelsAdvanced == mTargetNumberOfBarrels) {
       mCannonRevolve.setPercentOutput(0.0);
-      mTimer.start();
-      mStartTime = mTimer.get();
+      mCorrectionTimer.restart();
+      mStartTime = mCorrectionTimer.get();
       mRotationStep = false;
     }
   }
 
   public void correction() {
-    SmartDashboard.putBoolean("Correction Time > 0.5", (mTimer.get() - mStartTime) > 0.5);
-    SmartDashboard.putNumber("Time", mTimer.get());
-    if ((mTimer.get() - mStartTime) > 0.5) {
+    if ((mCorrectionTimer.get() - mStartTime) > 0.5) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
@@ -80,8 +78,9 @@ public class CannonRevolveSpinLimit extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    mTimer.stop();
     mCannonRevolve.setPercentOutput(0.0);
+    mCorrectionTimer.stop();
+    mCorrectionTimer.reset();
   }
 
   @Override

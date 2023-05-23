@@ -20,7 +20,7 @@ public class CannonRevolve extends SubsystemBase {
 
   private final WPI_TalonSRX revolveMotor = new WPI_TalonSRX(Constants.CANNON_REVOLVE_MOTOR);
   private final DigitalInput revolveLimitSwitch = new DigitalInput(Constants.CANNON_REVOLVE_LIMIT_SWITCH);
-  private double maxVelocity = 0.0;
+  // private double maxVelocity = 0.0;
   
   public CannonRevolve() {
     revolveMotor.configFactoryDefault();
@@ -36,7 +36,7 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.configNeutralDeadband(0.001);
 
     /** 
-     * For the following two paramenters, you will set the desired velocity and accel
+     * For the following two parameters, you will set the desired velocity and accel
      * for the system. It is recommended that velocity is set to 50% of the max velocity recorded.
      * If you set the Acceleration to the same value as Cruise Velocity, it will take a full second
      * for the system to reach Cruise Velocity. If you enter double of Cruise Velocity, it will take
@@ -46,26 +46,27 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.configMotionAcceleration(MAX_VELOCITY * 4.0); // Must be a reachable Accel (Estimation)
     
     /**
-     * TODO: Tune these
+     * Tune these for PID control
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
     revolveMotor.config_kP(0,15.0);
-    revolveMotor.config_kI(0, 0.1);
+    revolveMotor.config_kI(0, 0.0);
     revolveMotor.config_kD(0, 1.5);
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("REVOVLE LIMIT", getRevolveLimitSwitch());
+    SmartDashboard.putString("Cannon Revolve Current Command", getCurrentCommand().getName());
 
-    SmartDashboard.putNumber("REVOLVE Output %", revolveMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("REVLOVE POSITION", getPosition(false));
-    SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
+    SmartDashboard.putBoolean("Cannon Revolve Limit", getRevolveLimitSwitch());
+    SmartDashboard.putNumber("Cannon Revolve Output %", revolveMotor.getMotorOutputPercent());
+    // SmartDashboard.putNumber("REVOLVE POSITION", getPosition(false));
+    // SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
 
-    if (Math.abs(getVelocity(false)) > maxVelocity) {
-      maxVelocity = Math.abs(getVelocity(false));
-    }
-    SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
+    // if (Math.abs(getVelocity(false)) > maxVelocity) {
+    //   maxVelocity = Math.abs(getVelocity(false));
+    // }
+    // SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
   }
 
   public void setPercentOutput(double output) {
