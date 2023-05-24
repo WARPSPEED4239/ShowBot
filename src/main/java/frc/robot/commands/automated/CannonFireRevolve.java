@@ -12,6 +12,7 @@ public class CannonFireRevolve extends CommandBase {
   private Timer mTimer;
   private Timer mCorrectionTimer;
 
+  private boolean mFiringStarted;
   private boolean mCorrectionNeeded;
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
@@ -37,8 +38,9 @@ public class CannonFireRevolve extends CommandBase {
 
   @Override
   public void initialize() {
-    mEnd = false;
+    mFiringStarted = false;
     mRotationStep = true;
+    mEnd = false;
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
 
@@ -58,7 +60,7 @@ public class CannonFireRevolve extends CommandBase {
 
   @Override
   public void execute() {
-    if (mCorrectionNeeded) { // Correction to barrel is needed, do not fire
+    if (mCorrectionNeeded && !mFiringStarted) { // Correction to barrel is needed, do not fire
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
       if (mRotationStep) {
@@ -66,12 +68,13 @@ public class CannonFireRevolve extends CommandBase {
       } else {
         correction();
       }
-    } else if (mCannon.getFiringTankPressure() < mMinFiringPressure) { // Cannon not at min pressure, do not fire
+    } else if (mCannon.getFiringTankPressure() < mMinFiringPressure && !mFiringStarted) { // Cannon not at min pressure, do not fire
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
       mEnd = true;
     } else { // All conditions are met, fire
       double mElapsedTime = mTimer.get() - mStartTime;
+      mFiringStarted = true;
 
       if (mElapsedTime < 1.0) {
         mCannon.setLoadingSolenoidState(false);
@@ -110,9 +113,7 @@ public class CannonFireRevolve extends CommandBase {
 
     if (mNumberOfBarrelsAdvanced == 1) {
       mCannonRevolve.setPercentOutput(0.0);
-      System.out.println("RAN1");
       mCorrectionTimer.restart();
-      System.out.println("RAN2");
       mCorrectionStartTime = mTimer.get();
       System.out.println("Start Time" + mCorrectionStartTime);
       mRotationStep = false;
