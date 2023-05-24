@@ -81,6 +81,11 @@ public class CannonReloading extends CommandBase {
    */
   @Override
   public void execute() {
+    SmartDashboard.putNumber("Firing Tank Pressure REAL", mCannon.getFiringTankPressure());
+    SmartDashboard.putNumber("mMinFiringPressure", mMinFiringPressure);
+    SmartDashboard.putNumber("mMinFiringPressure", mMaxFiringPressure);
+    SmartDashboard.putBoolean("CHECK 1", mCannon.getFiringTankPressure() <= mMinFiringPressure);
+    SmartDashboard.putBoolean("CHECK 2", mCannon.getFiringTankPressure() >= mMaxFiringPressure);
     if (mCannon.getFiringTankPressure() <= mMinFiringPressure) { // Cannon Reloading State
       if ((mTimer.get() - mStartTime) < 1.0) { // TODO Maybe remove
         mCannon.setLoadingSolenoidState(false);
