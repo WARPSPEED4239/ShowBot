@@ -20,7 +20,9 @@ public class Cannon extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putString("Cannon Current Command", getCurrentCommand().getName());
+    try {
+      SmartDashboard.putString("Cannon Current Command", getCurrentCommand().getName());
+    } catch (Exception e) {}
 
     SmartDashboard.putBoolean("Loading Solenoid State", getLoadingSolenoidState());
     SmartDashboard.putBoolean("Firing Solenoid State", getFiringSolenoidState());
