@@ -72,7 +72,7 @@ public class CannonReloading extends CommandBase {
    *    b) Set loading solenoid to closed
    * 
    * 3) Else hold the Cannon's current state
-   *    Known: Let the firing tanks pressure be X, this case will run iff min_pressure < X < max_pressure
+   *    Known: Let the firing tanks pressure be X, this case will run iff minPressure < X < maxPressure
    *    a) Hold Cannon's current state
    *    b) Update the RGB's to red, signaling the cannon is ready to fire
    */
