@@ -16,6 +16,8 @@ public class Cannon extends SubsystemBase {
   private final double SLOPE = 250.0;
   private final double Y_INTERCEPT = -25.0;
 
+  private double minFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
+
   public Cannon() {}
 
   @Override
@@ -53,5 +55,13 @@ public class Cannon extends SubsystemBase {
 
   public double getFiringSensorVolts() {
     return firingPressure.getVoltage();
+  }
+
+  public double getMinFiringPressure() {
+    return minFiringPressure;
+  }
+
+  public void setMinFiringPressure(double minPressure) {
+    minFiringPressure = minPressure;
   }
 }

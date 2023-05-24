@@ -40,14 +40,17 @@ public class CannonReloading extends CommandBase {
       case Inside:
         mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
         mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_INSIDE;
+        mCannon.setMinFiringPressure(mMinFiringPressure);
         break;
       case Outside:
         mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_OUTSIDE;
         mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_OUTSIDE;
+        mCannon.setMinFiringPressure(mMinFiringPressure);
         break;
       default:
         mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
         mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_INSIDE;
+        mCannon.setMinFiringPressure(mMinFiringPressure);
         break;
     }
 

@@ -1,9 +1,7 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
 
@@ -11,7 +9,6 @@ public class CannonFireRevolve extends CommandBase {
 
   private final Cannon mCannon;
   private final CannonRevolve mCannonRevolve;
-  private final SendableChooser<Constants.Environment> mEnvirChooser;
   private Timer mTimer;
   private Timer mCorrectionTimer;
 
@@ -29,10 +26,9 @@ public class CannonFireRevolve extends CommandBase {
   // private final RGBController mRGBController;
   // private final Color[] colors = {Color.Red, Color.Black};
 
-  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, SendableChooser<Constants.Environment> envirChooser, double percentOutput/*, RGBController RGBController*/) {
+  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, double percentOutput/*, RGBController RGBController*/) {
     mCannon = cannon;
     mCannonRevolve = cannonRevolve;
-    mEnvirChooser = envirChooser;
     mPercentOutput = percentOutput;
     // mRGBController = RGBController;
 
@@ -44,19 +40,7 @@ public class CannonFireRevolve extends CommandBase {
     mEnd = false;
     mRotationStep = true;
     mNumberOfBarrelsAdvanced = 0;
-
-    Constants.Environment selected = mEnvirChooser.getSelected();
-    switch (selected) {
-      case Inside:
-        mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
-        break;
-      case Outside:
-        mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_OUTSIDE;
-        break;
-      default:
-        mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
-        break;
-    }
+    mMinFiringPressure = mCannon.getMinFiringPressure();
 
     mTimer = new Timer();
     mCorrectionTimer = new Timer();
