@@ -51,7 +51,7 @@ public class RobotContainer {
     mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED));
     mXbox.povRight().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, Constants.MAX_ROTATION_SPEED));
 
-    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, mEnvirChooser, Constants.ROTATION_SPEED/*, mRGBController*/).withTimeout(5.5));
+    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, Constants.ROTATION_SPEED/*, mRGBController*/).withTimeout(5.5));
   }
 
   /*public RGBController getRGBController() {
