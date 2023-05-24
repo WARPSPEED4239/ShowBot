@@ -51,7 +51,7 @@ public class CannonReloading extends CommandBase {
         break;
     }
 
-    mTimer.start();
+    mTimer.restart();
     mStartTime = mTimer.get();
 
     SmartDashboard.putNumber("MAX FIRING PRESSURE", mMaxFiringPressure);
