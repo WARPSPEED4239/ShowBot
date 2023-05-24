@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentController;
 import frc.robot.commands.CannonRevolveSetPercent;
@@ -28,6 +29,7 @@ public class RobotContainer {
   public RobotContainer() {
     mEnvirChooser.setDefaultOption("Inside", Constants.Environment.Inside);
     mEnvirChooser.addOption("Outside", Constants.Environment.Outside);
+    SmartDashboard.putData(mEnvirChooser);
 
     mCannon.setDefaultCommand(new CannonReloading(mCannon, mEnvirChooser/*, mRGBController*/));
     mCannonAngleAdjust.setDefaultCommand(new CannonAimSetPercentController(mCannonAngleAdjust, mXbox));
