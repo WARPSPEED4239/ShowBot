@@ -63,6 +63,7 @@ public class CannonFireRevolve extends CommandBase {
     if (!mCannonRevolve.getRevolveLimitSwitch()) {
       mCorrectionNeeded = true;
       mWaitingForLimit = true;
+      mPercentOutput = -mPercentOutput;
     } else {
       mCorrectionNeeded = false;
       mWaitingForLimit = false;
@@ -76,7 +77,6 @@ public class CannonFireRevolve extends CommandBase {
     if (mCorrectionNeeded) { // Correction to barrel is needed, do not fire
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
-      mPercentOutput = -mPercentOutput;
       if (mRotationStep) {
         initialRotation();
       } else {
