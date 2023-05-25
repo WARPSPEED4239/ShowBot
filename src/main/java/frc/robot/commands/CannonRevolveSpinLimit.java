@@ -14,7 +14,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private boolean mRotationStep;
   private boolean mEnd;
 
-  private double mStartTime = 0.0;
+  private double mCorrectionStartTime = 0.0;
   private Timer mCorrectionTimer;
 
   public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, double percentOutput) {
@@ -60,13 +60,13 @@ public class CannonRevolveSpinLimit extends CommandBase {
     if (mNumberOfBarrelsAdvanced == mTargetNumberOfBarrels) {
       mCannonRevolve.setPercentOutput(0.0);
       mCorrectionTimer.restart();
-      mStartTime = mCorrectionTimer.get();
+      mCorrectionStartTime = mCorrectionTimer.get();
       mRotationStep = false;
     }
   }
 
   public void correction() {
-    if ((mCorrectionTimer.get() - mStartTime) > 0.5) {
+    if ((mCorrectionTimer.get() - mCorrectionStartTime) > 0.5) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;

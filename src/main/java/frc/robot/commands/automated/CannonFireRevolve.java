@@ -114,15 +114,13 @@ public class CannonFireRevolve extends CommandBase {
     if (mNumberOfBarrelsAdvanced == 1) {
       mCannonRevolve.setPercentOutput(0.0);
       mCorrectionTimer.restart();
-      mCorrectionStartTime = mTimer.get();
-      System.out.println("Start Time" + mCorrectionStartTime);
+      mCorrectionStartTime = mCorrectionTimer.get();
       mRotationStep = false;
     }
   }
 
   public void correction() {
     if ((mCorrectionTimer.get() - mCorrectionStartTime) > 0.5) {
-      System.out.println("Time: " + mCorrectionTimer.get());
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
