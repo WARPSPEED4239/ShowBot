@@ -12,7 +12,7 @@ public class Cannon extends SubsystemBase {
   private final Solenoid firingSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, Constants.CANNON_FIRING_SOLENOID);
   private final AnalogInput firingPressure = new AnalogInput(Constants.CANNON_FIRING_PRESSURE);
 
-  private final double DEFAULT_VOLTS = 4.52; // TODO Tune for a tank's desired PSI
+  private final double DEFAULT_VOLTS = 4.52; // Adjust this number when the tank is at a desired PSI until what the gauge reads is what the readout reads
   private final double SLOPE = 250.0;
   private final double Y_INTERCEPT = -25.0;
 
@@ -24,7 +24,7 @@ public class Cannon extends SubsystemBase {
   public void periodic() {
     try {
       SmartDashboard.putString("Cannon Current Command", getCurrentCommand().getName());
-    } catch (Exception e) {}
+    } catch (NullPointerException e) {}
 
     SmartDashboard.putBoolean("Loading Solenoid State", getLoadingSolenoidState());
     SmartDashboard.putBoolean("Firing Solenoid State", getFiringSolenoidState());

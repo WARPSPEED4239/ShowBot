@@ -58,7 +58,7 @@ public class CannonRevolve extends SubsystemBase {
   public void periodic() {
     try {
       SmartDashboard.putString("Cannon Revolve Current Command", getCurrentCommand().getName());
-    } catch (Exception e) {}
+    } catch (NullPointerException e) {}
 
     SmartDashboard.putBoolean("Cannon Revolve Limit", getRevolveLimitSwitch());
     SmartDashboard.putNumber("Cannon Revolve Output %", revolveMotor.getMotorOutputPercent());
