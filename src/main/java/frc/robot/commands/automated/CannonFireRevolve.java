@@ -1,6 +1,7 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
@@ -43,6 +44,7 @@ public class CannonFireRevolve extends CommandBase {
     mEnd = false;
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", 0.45); // TODO TEMP
 
     mTimer = new Timer();
     mCorrectionTimer = new Timer();

@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpinLimit extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private final double mPercentOutput;
+  private double mPercentOutput; // TODO TEMP (PUT BACK TO FINAL)
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mWaitingForLimit;
@@ -21,6 +22,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
     mPercentOutput = percentOutput;
+
     addRequirements(mCannonRevolve);
   }
 
@@ -30,6 +32,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mRotationStep = true;
     mEnd = false;
     mCorrectionTimer = new Timer();
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", 0.45); // TODO TEMP
 
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }

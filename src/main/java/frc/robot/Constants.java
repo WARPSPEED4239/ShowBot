@@ -24,7 +24,7 @@ public final class Constants {
                             SRX_BARREL_OFFSET = 0;
 
     public static final double EPSILON = 0.0001,
-                               ROTATION_SPEED = 0.5,              // TODO Adjust Rotation Speed (Maybe setup on SmartDashboard?)
+                               ROTATION_SPEED = 0.45,              // TODO Adjust Rotation Speed
                                MAX_ROTATION_SPEED = 0.7,
                                MIN_FIRING_PRESSURE_INSIDE = 80.0,  // TODO Tune Inside and Outside Pressures
                                MAX_FIRING_PRESSURE_INSIDE = 87.0,
