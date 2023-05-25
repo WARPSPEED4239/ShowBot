@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpinLimit extends CommandBase {
@@ -11,6 +12,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mPercentOutput; // TODO TEMP (PUT BACK TO FINAL)
   private int mNumberOfBarrelsAdvanced;
 
+  private boolean mIsPositive;
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
   private boolean mEnd;
@@ -18,10 +20,10 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mCorrectionStartTime = 0.0;
   private Timer mCorrectionTimer;
 
-  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, double percentOutput) {
+  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) { // TODO Switch back to double
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
-    mPercentOutput = percentOutput;
+    mIsPositive = isPositive;
 
     addRequirements(mCannonRevolve);
   }
@@ -32,7 +34,11 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mRotationStep = true;
     mEnd = false;
     mCorrectionTimer = new Timer();
-    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", 0.45); // TODO TEMP
+    
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED); // TODO TEMP
+    if (!mIsPositive) {
+      mPercentOutput = -mPercentOutput;
+    }
 
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }

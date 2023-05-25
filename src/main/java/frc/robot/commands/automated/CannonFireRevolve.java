@@ -3,6 +3,7 @@ package frc.robot.commands.automated;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
 
@@ -13,6 +14,7 @@ public class CannonFireRevolve extends CommandBase {
   private Timer mTimer;
   private Timer mCorrectionTimer;
 
+  private boolean mIsPositive; // TODO TEMP
   private boolean mFiringStarted;
   private boolean mCorrectionNeeded;
   private boolean mWaitingForLimit;
@@ -28,10 +30,10 @@ public class CannonFireRevolve extends CommandBase {
   // private final RGBController mRGBController;
   // private final Color[] colors = {Color.Red, Color.Black};
 
-  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, double percentOutput/*, RGBController RGBController*/) {
+  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, boolean isPositive/*, RGBController RGBController*/) {
     mCannon = cannon;
     mCannonRevolve = cannonRevolve;
-    mPercentOutput = percentOutput;
+    mIsPositive = isPositive;
     // mRGBController = RGBController;
 
     addRequirements(mCannon, mCannonRevolve);
@@ -44,7 +46,11 @@ public class CannonFireRevolve extends CommandBase {
     mEnd = false;
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
-    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", 0.45); // TODO TEMP
+
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED); // TODO TEMP
+    if (!mIsPositive) {
+      mPercentOutput = -mPercentOutput;
+    }
 
     mTimer = new Timer();
     mCorrectionTimer = new Timer();
