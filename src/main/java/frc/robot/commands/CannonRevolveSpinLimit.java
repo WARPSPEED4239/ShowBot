@@ -20,7 +20,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mCorrectionStartTime = 0.0;
   private Timer mCorrectionTimer;
 
-  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) { // TODO Switch back to double
+  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) { // TODO TEMP Switch back to double
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
     mIsPositive = isPositive;
