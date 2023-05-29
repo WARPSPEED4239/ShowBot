@@ -11,6 +11,7 @@ public class DrivetrainArcadeDrive extends CommandBase {
   public DrivetrainArcadeDrive(Drivetrain drivetrain, CommandXboxController xbox) {
     mDrivetrain = drivetrain;
     mXbox = xbox;
+    
     addRequirements(mDrivetrain);
   }
 
