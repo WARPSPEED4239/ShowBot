@@ -11,7 +11,7 @@ public class Robot extends TimedRobot {
     /*mRobotContainer =*/ new RobotContainer();
 
     // Color[] colors = {Color.RedDim, Color.Black};
-    // mRobotContainer.getRGBController().setColors(colors, 1.5);
+    // mRobotContainer.getRGBController().setColors(colors, 2.0);
   }
 
   @Override
@@ -22,18 +22,20 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     // Color[] colors = {Color.RedDim, Color.Black};
-    // mRobotContainer.getRGBController().setColors(colors, 1.5);
+    // mRobotContainer.getRGBController().setColors(colors, 2.0);
   }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
   }
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+  }
 
   @Override
   public void testInit() {
@@ -41,5 +43,6 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 }

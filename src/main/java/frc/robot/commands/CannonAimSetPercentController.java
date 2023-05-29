@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.CannonAngleAdjust;
 
-public class CannonAimSetPercentOutputWithController extends CommandBase {
+public class CannonAimSetPercentController extends CommandBase {
   private final CannonAngleAdjust mCannonAngleAdjust;
   private final CommandXboxController mXbox;
 
-  public CannonAimSetPercentOutputWithController(CannonAngleAdjust cannonAngleAdjust, CommandXboxController xbox) {
+  public CannonAimSetPercentController(CannonAngleAdjust cannonAngleAdjust, CommandXboxController xbox) {
     mCannonAngleAdjust = cannonAngleAdjust;
     mXbox = xbox;
     addRequirements(mCannonAngleAdjust);
