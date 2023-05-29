@@ -11,6 +11,7 @@ public class CannonAimSetPercentController extends CommandBase {
   public CannonAimSetPercentController(CannonAngleAdjust cannonAngleAdjust, CommandXboxController xbox) {
     mCannonAngleAdjust = cannonAngleAdjust;
     mXbox = xbox;
+    
     addRequirements(mCannonAngleAdjust);
   }
 
