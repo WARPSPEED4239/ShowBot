@@ -12,6 +12,7 @@ public class CannonRevolveSpinEncoder extends CommandBase {
   public CannonRevolveSpinEncoder(CannonRevolve cannonRevolve, int targetNumberOfBarrels) {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
+    
     addRequirements(mCannonRevolve);
   }
 

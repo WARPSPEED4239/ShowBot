@@ -12,54 +12,56 @@ public class Drivetrain extends SubsystemBase {
   private final int CURRENT_LIMIT = 45;
 	private final double RAMP_RATE = 0.05;
 	
-	private CANSparkMax leftMaster = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_LEFT_1, MotorType.kBrushless);
-	private CANSparkMax leftSlave = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_LEFT_2, MotorType.kBrushless);
-	private CANSparkMax rightMaster = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_RIGHT_1, MotorType.kBrushless);
-	private CANSparkMax rightSlave = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_RIGHT_2, MotorType.kBrushless);
+	private CANSparkMax leftMotor1 = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_LEFT_1, MotorType.kBrushless);
+	private CANSparkMax leftMotor2 = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_LEFT_2, MotorType.kBrushless);
+	private CANSparkMax rightMotor1 = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_RIGHT_1, MotorType.kBrushless);
+	private CANSparkMax rightMotor2 = new CANSparkMax(Constants.DRIVETRAIN_MOTOR_RIGHT_2, MotorType.kBrushless);
   
-  private DifferentialDrive drive = new DifferentialDrive(leftMaster, rightMaster);
+  private DifferentialDrive drive = new DifferentialDrive(leftMotor1, rightMotor1);
 	
 	public Drivetrain() {
-    leftMaster.restoreFactoryDefaults();
-    leftSlave.restoreFactoryDefaults();
-    rightMaster.restoreFactoryDefaults();
-    rightSlave.restoreFactoryDefaults();
+    leftMotor1.restoreFactoryDefaults();
+    leftMotor2.restoreFactoryDefaults();
+    rightMotor1.restoreFactoryDefaults();
+    rightMotor2.restoreFactoryDefaults();
 
-    rightMaster.setInverted(true);
-    rightSlave.setInverted(true);
+    rightMotor1.setInverted(true);
+    rightMotor2.setInverted(true);
 
-		leftSlave.follow(leftMaster);
-		rightSlave.follow(rightMaster);
+		leftMotor2.follow(leftMotor1);
+		rightMotor2.follow(rightMotor1);
     
-    leftMaster.setIdleMode(IdleMode.kBrake);
-    leftSlave.setIdleMode(IdleMode.kBrake);
-    rightMaster.setIdleMode(IdleMode.kBrake);
-    rightSlave.setIdleMode(IdleMode.kBrake);
+    leftMotor1.setIdleMode(IdleMode.kBrake);
+    leftMotor2.setIdleMode(IdleMode.kBrake);
+    rightMotor1.setIdleMode(IdleMode.kBrake);
+    rightMotor2.setIdleMode(IdleMode.kBrake);
 
-    leftMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    leftSlave.setSmartCurrentLimit(CURRENT_LIMIT);
-    rightMaster.setSmartCurrentLimit(CURRENT_LIMIT);
-    rightSlave.setSmartCurrentLimit(CURRENT_LIMIT);
+    leftMotor1.setSmartCurrentLimit(CURRENT_LIMIT);
+    leftMotor2.setSmartCurrentLimit(CURRENT_LIMIT);
+    rightMotor1.setSmartCurrentLimit(CURRENT_LIMIT);
+    rightMotor2.setSmartCurrentLimit(CURRENT_LIMIT);
 
-    leftMaster.setOpenLoopRampRate(RAMP_RATE);
-    leftSlave.setOpenLoopRampRate(RAMP_RATE);
-    rightMaster.setOpenLoopRampRate(RAMP_RATE);
-    rightSlave.setOpenLoopRampRate(RAMP_RATE);
+    leftMotor1.setOpenLoopRampRate(RAMP_RATE);
+    leftMotor2.setOpenLoopRampRate(RAMP_RATE);
+    rightMotor1.setOpenLoopRampRate(RAMP_RATE);
+    rightMotor2.setOpenLoopRampRate(RAMP_RATE);
 
-    leftMaster.burnFlash();
-    leftSlave.burnFlash();
-    rightMaster.burnFlash();
-    rightSlave.burnFlash();
+    leftMotor1.burnFlash();
+    leftMotor2.burnFlash();
+    rightMotor1.burnFlash();
+    rightMotor2.burnFlash();
 	}
 	
 	public void arcadeDrive(double move, double rotate) {
 		final double MIN_MOVE_THRESHOLD = 0.05;
 		final double MIN_ROTATE_THRESHOLD = 0.20;
-		if (Math.abs(move) < MIN_MOVE_THRESHOLD)
+		if (Math.abs(move) < MIN_MOVE_THRESHOLD) {
 			move = 0.0;
-		if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD)
+    }
+		if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD) {
 			rotate = 0.0;
-		
-    	drive.arcadeDrive(move, rotate);
+    }
+    
+    drive.arcadeDrive(move, rotate);
 	}
 }
