@@ -14,7 +14,7 @@ public class CannonFireRevolve extends CommandBase {
   private Timer mTimer;
   private Timer mCorrectionTimer;
 
-  private boolean mIsPositive; // TODO TEMP
+  private boolean mIsPositive;
   private boolean mFiringStarted;
   private boolean mCorrectionNeeded;
   private boolean mWaitingForLimit;
@@ -47,7 +47,7 @@ public class CannonFireRevolve extends CommandBase {
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
 
-    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED); // TODO TEMP
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
     if (!mIsPositive) {
       mPercentOutput = -mPercentOutput;
     }
@@ -84,11 +84,11 @@ public class CannonFireRevolve extends CommandBase {
       double mElapsedTime = mTimer.get() - mStartTime;
       mFiringStarted = true;
 
-      if (mElapsedTime < 1.0) {
+      if (mElapsedTime < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
         // mRGBController.setColors(colors, 0.1);
-      } else if (mElapsedTime >= 1.0 && mElapsedTime < 1.75) {
+      } else if (mElapsedTime >= 0.5 && mElapsedTime < 1.25) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
         // mRGBController.setColor(Color.White);

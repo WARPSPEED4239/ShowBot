@@ -9,7 +9,7 @@ import frc.robot.subsystems.CannonRevolve;
 public class CannonRevolveSpinLimit extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private double mPercentOutput; // TODO TEMP (PUT BACK TO FINAL)
+  private double mPercentOutput;
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mIsPositive;
@@ -20,7 +20,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mCorrectionStartTime = 0.0;
   private Timer mCorrectionTimer;
 
-  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) { // TODO TEMP Switch back to double
+  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
     mIsPositive = isPositive;
@@ -35,7 +35,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mEnd = false;
     mCorrectionTimer = new Timer();
     
-    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED); // TODO TEMP
+    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
     if (!mIsPositive) {
       mPercentOutput = -mPercentOutput;
     }

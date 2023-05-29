@@ -16,7 +16,7 @@ public class CannonReloading extends CommandBase {
   private final SendableChooser<Constants.Environment> mEnvirChooser;
   private Timer mTimer;
 
-  private boolean mReadyToFire;
+  private boolean mIsPressurized;
   private double mStartTime;
   private double mMinFiringPressure;
   private double mMaxFiringPressure;
@@ -81,13 +81,8 @@ public class CannonReloading extends CommandBase {
    */
   @Override
   public void execute() {
-    SmartDashboard.putNumber("mMinFiringPressure", mMinFiringPressure);
-    SmartDashboard.putNumber("mMaxFiringPressure", mMaxFiringPressure);
-    SmartDashboard.putBoolean("CHECK 1", mCannon.getFiringTankPressure() <= mMinFiringPressure);
-    SmartDashboard.putBoolean("CHECK 2", mCannon.getFiringTankPressure() >= mMaxFiringPressure);
-
     if (mCannon.getFiringTankPressure() <= mMinFiringPressure) { // Cannon Reloading State
-      if ((mTimer.get() - mStartTime) < 1.0) {
+      if ((mTimer.get() - mStartTime) < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
       } else {
@@ -95,19 +90,19 @@ public class CannonReloading extends CommandBase {
         mCannon.setFiringSolenoidState(false);
       }
       // mRGBController.setColor(Color.Black);
-      mReadyToFire = false;
+      mIsPressurized = false;
     } else if (mCannon.getFiringTankPressure() >= mMaxFiringPressure) { // Cannon at Max Firing Pressure
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
       // mRGBController.setColor(Color.Red);
-      mReadyToFire = true;
+      mIsPressurized = true;
     } else { // Cannon is Ready to Fire
       mCannon.setFiringSolenoidState(false);
       // mRGBController.setColor(Color.Red);
-      mReadyToFire = true;
+      mIsPressurized = true;
     }
 
-    SmartDashboard.putBoolean("Cannon Ready to Fire", mReadyToFire);
+    SmartDashboard.putBoolean("Cannon Pressurized", mIsPressurized);
   }
 
   @Override
