@@ -12,7 +12,6 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mPercentOutput;
   private int mNumberOfBarrelsAdvanced;
 
-  private boolean mIsPositive;
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
   private boolean mEnd;
@@ -20,10 +19,9 @@ public class CannonRevolveSpinLimit extends CommandBase {
   private double mCorrectionStartTime = 0.0;
   private Timer mCorrectionTimer;
 
-  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels, boolean isPositive) {
+  public CannonRevolveSpinLimit(CannonRevolve cannonRevolve, int targetNumberOfBarrels) {
     mCannonRevolve = cannonRevolve;
     mTargetNumberOfBarrels = targetNumberOfBarrels;
-    mIsPositive = isPositive;
 
     addRequirements(mCannonRevolve);
   }
@@ -36,7 +34,7 @@ public class CannonRevolveSpinLimit extends CommandBase {
     mCorrectionTimer = new Timer();
     
     mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
-    if (!mIsPositive) {
+    if (mTargetNumberOfBarrels < 0) {
       mPercentOutput = -mPercentOutput;
     }
 

@@ -45,10 +45,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    mXbox.leftBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -1, false).withTimeout(3.5));
-    mXbox.rightBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 1, true).withTimeout(3.5));
-    mXbox.x().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -8, false).withTimeout(15.0));
-    mXbox.b().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 8, true).withTimeout(15.0));
+    mXbox.leftBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -1).withTimeout(3.5));
+    mXbox.rightBumper().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 1).withTimeout(3.5));
+    mXbox.x().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, -8).withTimeout(15.0));
+    mXbox.b().onTrue(new CannonRevolveSpinLimit(mCannonRevolve, 8).withTimeout(15.0));
     mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED));
     mXbox.povRight().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, Constants.MAX_ROTATION_SPEED));
 
