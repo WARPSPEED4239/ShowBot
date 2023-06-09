@@ -8,13 +8,12 @@ import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonFireRevolve extends CommandBase {
-
   private final Cannon mCannon;
   private final CannonRevolve mCannonRevolve;
+  private final boolean mIsPositive;
   private Timer mTimer;
   private Timer mCorrectionTimer;
 
-  private boolean mIsPositive;
   private boolean mFiringStarted;
   private boolean mCorrectionNeeded;
   private boolean mWaitingForLimit;
