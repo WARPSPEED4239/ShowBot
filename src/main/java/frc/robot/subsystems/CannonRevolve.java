@@ -14,13 +14,13 @@ public class CannonRevolve extends SubsystemBase {
   private final int TOTAL_BARRELS = 8;
   private final int CURRENT_LIMIT = 45;
 
-  private final double MAX_VELOCITY = 480.0;
-  private final double NORMAL_OPERATION_PERCENT = 0.5;
-  private final double NORMAL_VELOCITY_AT_PERCENT = 155.0;
+  private final double MAX_VELOCITY = 450.0;
+  private final double NORMAL_OPERATION_PERCENT = 0.75;
+  private final double NORMAL_VELOCITY_AT_PERCENT = 220.0;
 
   private final WPI_TalonSRX revolveMotor = new WPI_TalonSRX(Constants.CANNON_REVOLVE_MOTOR);
   private final DigitalInput revolveLimitSwitch = new DigitalInput(Constants.CANNON_REVOLVE_LIMIT_SWITCH);
-  // private double maxVelocity = 0.0;
+  private double maxVelocity = 0.0;
   
   public CannonRevolve() {
     revolveMotor.configFactoryDefault();
@@ -49,9 +49,9 @@ public class CannonRevolve extends SubsystemBase {
      * Tune these for PID control
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
-    revolveMotor.config_kP(0,15.0);
+    revolveMotor.config_kP(0,5.0);
     revolveMotor.config_kI(0, 0.0);
-    revolveMotor.config_kD(0, 1.5);
+    revolveMotor.config_kD(0, 0.0);
   }
 
   @Override
@@ -63,12 +63,12 @@ public class CannonRevolve extends SubsystemBase {
     SmartDashboard.putBoolean("Cannon Revolve Limit", getRevolveLimitSwitch());
     SmartDashboard.putNumber("Cannon Revolve Output %", revolveMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("REVOLVE POSITION", getPosition(false));
-    // SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
+    SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
 
-    // if (Math.abs(getVelocity(false)) > maxVelocity) {
-    //   maxVelocity = Math.abs(getVelocity(false));
-    // }
-    // SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
+    if (Math.abs(getVelocity(false)) > maxVelocity) {
+      maxVelocity = Math.abs(getVelocity(false));
+    }
+    SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
   }
 
   public void setPercentOutput(double output) {
