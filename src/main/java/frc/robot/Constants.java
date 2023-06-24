@@ -24,14 +24,16 @@ public final class Constants {
                             SRX_BARREL_OFFSET = 0;
 
     public static final double EPSILON = 0.0001,
-                               ROTATION_SPEED = 0.45,
-                               MAX_ROTATION_SPEED = 0.75,
+                               ROTATION_SPEED = 0.5,
+                               MAX_ROTATION_SPEED = 1.0,
                                MIN_FIRING_PRESSURE_INSIDE = 80.0,  // TODO Adjust Inside and Outside Pressures
                                MAX_FIRING_PRESSURE_INSIDE = 87.0,
                                MIN_FIRING_PRESSURE_OUTSIDE = 110.0,
-                               MAX_FIRING_PRESSURE_OUTSIDE = 117.0;
+                               MAX_FIRING_PRESSURE_OUTSIDE = 117.0,
+                               MIN_FIRING_PRESSURE_PARADE = 70.0,
+                               MAX_FIRING_PRESSURE_PARADE = 77.0;
 
     public static enum Environment {
-        Inside, Outside
+        Inside, Outside, Parade
     }
 }

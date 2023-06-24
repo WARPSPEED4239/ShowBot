@@ -47,6 +47,11 @@ public class CannonReloading extends CommandBase {
         mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_OUTSIDE;
         mCannon.setMinFiringPressure(mMinFiringPressure);
         break;
+      case Parade:
+        mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_PARADE;
+        mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_PARADE;
+        mCannon.setMinFiringPressure(mMinFiringPressure);
+        break;
       default:
         mMinFiringPressure = Constants.MIN_FIRING_PRESSURE_INSIDE;
         mMaxFiringPressure = Constants.MAX_FIRING_PRESSURE_INSIDE;
@@ -57,7 +62,7 @@ public class CannonReloading extends CommandBase {
     mTimer.restart();
     mStartTime = mTimer.get();
 
-    SmartDashboard.putNumber("MAX FIRING PRESSURE", mMaxFiringPressure);
+    SmartDashboard.putNumber("Max Firing Pressure", mMaxFiringPressure);
   }
 
   /* 

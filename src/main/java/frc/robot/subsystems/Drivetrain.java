@@ -61,7 +61,7 @@ public class Drivetrain extends SubsystemBase {
 		if (Math.abs(rotate) < MIN_ROTATE_THRESHOLD) {
 			rotate = 0.0;
     }
-    
+		
     drive.arcadeDrive(move, rotate);
 	}
 }

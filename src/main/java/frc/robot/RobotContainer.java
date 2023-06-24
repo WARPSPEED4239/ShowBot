@@ -29,6 +29,7 @@ public class RobotContainer {
   public RobotContainer() {
     mEnvirChooser.setDefaultOption("Inside", Constants.Environment.Inside);
     mEnvirChooser.addOption("Outside", Constants.Environment.Outside);
+    mEnvirChooser.addOption("Parade", Constants.Environment.Parade);
     SmartDashboard.putData(mEnvirChooser);
     SmartDashboard.putNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
 
