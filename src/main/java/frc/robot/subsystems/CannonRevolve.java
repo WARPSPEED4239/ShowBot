@@ -62,8 +62,8 @@ public class CannonRevolve extends SubsystemBase {
 
     SmartDashboard.putBoolean("Cannon Revolve Limit", getRevolveLimitSwitch());
     SmartDashboard.putNumber("Cannon Revolve Output %", revolveMotor.getMotorOutputPercent());
-    SmartDashboard.putNumber("REVOLVE POSITION", getPosition(false));
-    SmartDashboard.putNumber("REVOLVE VELOCITY", getVelocity(false));
+    SmartDashboard.putNumber("Revolve Position", getPosition(false));
+    // SmartDashboard.putNumber("Revolve Velocity", getVelocity(false));
 
     /*if (Math.abs(getVelocity(false)) > maxVelocity) {
       maxVelocity = Math.abs(getVelocity(false));
