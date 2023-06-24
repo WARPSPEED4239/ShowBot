@@ -20,7 +20,7 @@ public class CannonRevolve extends SubsystemBase {
 
   private final WPI_TalonSRX revolveMotor = new WPI_TalonSRX(Constants.CANNON_REVOLVE_MOTOR);
   private final DigitalInput revolveLimitSwitch = new DigitalInput(Constants.CANNON_REVOLVE_LIMIT_SWITCH);
-  private double maxVelocity = 0.0;
+  // private double maxVelocity = 0.0;
   
   public CannonRevolve() {
     revolveMotor.configFactoryDefault();
@@ -49,7 +49,7 @@ public class CannonRevolve extends SubsystemBase {
      * Tune these for PID control
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
-    revolveMotor.config_kP(0,5.0);
+    revolveMotor.config_kP(0,10.0);
     revolveMotor.config_kI(0, 0.0);
     revolveMotor.config_kD(0, 0.0);
   }
@@ -63,12 +63,12 @@ public class CannonRevolve extends SubsystemBase {
     SmartDashboard.putBoolean("Cannon Revolve Limit", getRevolveLimitSwitch());
     SmartDashboard.putNumber("Cannon Revolve Output %", revolveMotor.getMotorOutputPercent());
     SmartDashboard.putNumber("REVOLVE POSITION", getPosition(false));
-    SmartDashboard.putNumber("REVOLVE Velocity", getVelocity(false));
+    SmartDashboard.putNumber("REVOLVE VELOCITY", getVelocity(false));
 
-    if (Math.abs(getVelocity(false)) > maxVelocity) {
+    /*if (Math.abs(getVelocity(false)) > maxVelocity) {
       maxVelocity = Math.abs(getVelocity(false));
     }
-    SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);
+    SmartDashboard.putNumber("REVOLVE Max Velocity", maxVelocity);*/
   }
 
   public void setPercentOutput(double output) {
@@ -88,7 +88,7 @@ public class CannonRevolve extends SubsystemBase {
   public void setPosition(int targetNumberOfBarrels) {
     int ticksPerBarrel = Constants.SRX_COUNTS_PER_REV / TOTAL_BARRELS;
     double currentBarrelPosition = ticksPerBarrel * Math.round(getPosition(false) / ticksPerBarrel);
-    int positionInSRXUnits = (int) currentBarrelPosition + (ticksPerBarrel * targetNumberOfBarrels) - Constants.SRX_BARREL_OFFSET;
+    int positionInSRXUnits = (int) currentBarrelPosition + (ticksPerBarrel * targetNumberOfBarrels) + Constants.SRX_BARREL_OFFSET;
 
     revolveMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
   }
