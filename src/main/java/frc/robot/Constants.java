@@ -15,7 +15,7 @@ public final class Constants {
     public static final int CANNON_FIRING_PRESSURE = 1; // ANALOG IN
 
     public static final int CANNON_LOADING_SOLENOID = 0, // PCM
-                            CANNON_FIRING_SOLENOID = 1;
+                            CANNON_FIRING_SOLENOID = 3;
 
     public static final double MAX_ROTATION_SPEED = 0.75;
 }
