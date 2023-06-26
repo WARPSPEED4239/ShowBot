@@ -48,7 +48,7 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.configMotionAcceleration(MAX_VELOCITY * 4.0); // Must be a reachable Accel (Estimation)
     
     /**
-     * Tune these for PID control (TODO SETUP FOR VELOCITY CONTROL)
+     * Tune these for PID control (TODO SETUP FOR VELOCITY CONTROL, LOOKS AT CTRE DOCS)
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
     revolveMotor.config_kP(0,10.0);
