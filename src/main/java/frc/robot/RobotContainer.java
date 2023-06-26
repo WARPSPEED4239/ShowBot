@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentController;
 import frc.robot.commands.CannonRevolveSetPercent;
-import frc.robot.commands.CannonRevolveSpinEncoder;
 import frc.robot.commands.CannonRevolveSpinVelocity;
 import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.commands.automated.CannonFireRevolve;
