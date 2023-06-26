@@ -41,12 +41,14 @@ public class CannonRevolve extends SubsystemBase {
      * If you set the Acceleration to the same value as Cruise Velocity, it will take a full second
      * for the system to reach Cruise Velocity. If you enter double of Cruise Velocity, it will take
      * half a second, etc.
+     * 
+     * TODO Remove for velocity control
      */
     revolveMotor.configMotionCruiseVelocity(MAX_VELOCITY * 0.75); // Must be <= MAX_VELOCITY
     revolveMotor.configMotionAcceleration(MAX_VELOCITY * 4.0); // Must be a reachable Accel (Estimation)
     
     /**
-     * Tune these for PID control
+     * Tune these for PID control (TODO SETUP FOR VELOCITY CONTROL)
      */
     revolveMotor.config_kF(0, (NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT);
     revolveMotor.config_kP(0,10.0);
@@ -99,6 +101,13 @@ public class CannonRevolve extends SubsystemBase {
     } else {
       return revolveMotor.getSelectedSensorPosition() - Constants.SRX_BARREL_OFFSET;
     }
+  }
+
+  /*
+   * TODO Maybe convert to be in barrels per second? Some other more useful units?
+   */
+  public void setVelocity(int velocityInSRXUnits) {
+    revolveMotor.set(ControlMode.Velocity, velocityInSRXUnits);
   }
 
   public double getVelocity(boolean inBarrelsPer100ms) {

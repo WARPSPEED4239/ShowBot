@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CannonAimSetPercentController;
 import frc.robot.commands.CannonRevolveSetPercent;
 import frc.robot.commands.CannonRevolveSpinEncoder;
+import frc.robot.commands.CannonRevolveSpinVelocity;
 import frc.robot.commands.DrivetrainArcadeDrive;
 import frc.robot.commands.automated.CannonFireRevolve;
 import frc.robot.commands.automated.CannonReloading;
@@ -46,10 +47,10 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    mXbox.leftBumper().onTrue(new CannonRevolveSpinEncoder(mCannonRevolve, -1));
-    mXbox.rightBumper().onTrue(new CannonRevolveSpinEncoder(mCannonRevolve, 1));
-    mXbox.x().onTrue(new CannonRevolveSpinEncoder(mCannonRevolve, -8));
-    mXbox.b().onTrue(new CannonRevolveSpinEncoder(mCannonRevolve, 8));
+    mXbox.leftBumper().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, -1));
+    mXbox.rightBumper().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, 1));
+    mXbox.x().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, -8));
+    mXbox.b().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, 8));
     mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED));
     mXbox.povRight().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, Constants.MAX_ROTATION_SPEED));
 
