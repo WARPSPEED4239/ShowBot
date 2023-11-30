@@ -9,7 +9,7 @@ All that should be needed to be done here is uncomment and test once you get the
 Where I think we go from here is doing velocity control with the current limit switch rotation control. This will have the benefits of using our current rotation logic plus a constant rotation speed regardless of friction (in theory). I can help you with this next time you guys work on the ShowBot if you would like.  
   
 3) There are currently 4 branches in the repo:  
-main: uses code we used for parade and limit switch rotation  
+**main:** uses code we used for parade and limit switch rotation  
 **develop:** I started to implement encoder rotation here. This is where you will develop velocity control  
 **automatedLimit:** The same as main currently  
 **manualControl:** Only can control solenoids and motors manually, no RGBs.  
