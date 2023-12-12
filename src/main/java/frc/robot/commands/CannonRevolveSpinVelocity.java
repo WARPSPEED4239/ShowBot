@@ -7,7 +7,7 @@ import frc.robot.subsystems.CannonRevolve;
 public class CannonRevolveSpinVelocity extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private int mVelocity = 200; // TODO TUNE THIS NUMBER
+  private int mVelocity = 200; // TODO 2) Put said number from step 1 here
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mWaitingForLimit;
@@ -48,7 +48,7 @@ public class CannonRevolveSpinVelocity extends CommandBase {
   }
 
   public void initialRotation() {
-    mCannonRevolve.setVelocity(mVelocity);
+    mCannonRevolve.setVelocity(mVelocity, false);
 
     if (mWaitingForLimit) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
@@ -75,7 +75,7 @@ public class CannonRevolveSpinVelocity extends CommandBase {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
       } else {
-        mCannonRevolve.setVelocity(-mVelocity);
+        mCannonRevolve.setVelocity(-mVelocity, false);
       }
     }
   }
