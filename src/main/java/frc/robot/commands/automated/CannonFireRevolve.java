@@ -90,11 +90,10 @@ public class CannonFireRevolve extends CommandBase {
       if (mElapsedTime < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
-
         if (callColors) {
-          mRGBController.setColors(colors, 0.1);
+          mRGBController.setColors(colors, 0.05);
+          callColors = false;
         }
-        callColors = false;
       } else if (mElapsedTime >= 0.5 && mElapsedTime < 1.25) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
