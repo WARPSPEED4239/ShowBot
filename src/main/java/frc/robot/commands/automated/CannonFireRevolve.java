@@ -21,6 +21,7 @@ public class CannonFireRevolve extends CommandBase {
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
   private boolean mEnd;
+  private boolean callColors;
 
   private int mNumberOfBarrelsAdvanced;
   private double mPercentOutput;
@@ -47,6 +48,7 @@ public class CannonFireRevolve extends CommandBase {
     mEnd = false;
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
+    callColors = true;
 
     mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
     if (!mIsPositive) {
@@ -88,7 +90,11 @@ public class CannonFireRevolve extends CommandBase {
       if (mElapsedTime < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
-        mRGBController.setColors(colors, 0.1);
+
+        if (callColors) {
+          mRGBController.setColors(colors, 0.1);
+        }
+        callColors = false;
       } else if (mElapsedTime >= 0.5 && mElapsedTime < 1.25) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
