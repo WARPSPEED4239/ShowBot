@@ -10,9 +10,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     mRobotContainer = new RobotContainer();
-
-    Color[] colors = {Color.RedDim, Color.Black};
-    mRobotContainer.getRGBController().setColors(colors, 1.0);
   }
 
   @Override
@@ -23,7 +20,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     Color[] colors = {Color.RedDim, Color.Black};
-    mRobotContainer.getRGBController().setColors(colors, 2.0);
+    mRobotContainer.getRGBController().setColors(colors, 1.0);
   }
 
   @Override
