@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
+import frc.robot.tools.RGBController;
+import frc.robot.tools.RGBController.Color;
 
 public class CannonFireRevolve extends CommandBase {
   private final Cannon mCannon;
@@ -26,14 +28,14 @@ public class CannonFireRevolve extends CommandBase {
   private double mStartTime;
   private double mCorrectionStartTime;
 
-  // private final RGBController mRGBController;
-  // private final Color[] colors = {Color.Red, Color.Black};
+  private final RGBController mRGBController;
+  private final Color[] colors = {Color.Red, Color.Black};
 
-  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, boolean isPositive/*, RGBController RGBController*/) {
+  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, boolean isPositive, RGBController RGBController) {
     mCannon = cannon;
     mCannonRevolve = cannonRevolve;
     mIsPositive = isPositive;
-    // mRGBController = RGBController;
+    mRGBController = RGBController;
 
     addRequirements(mCannon, mCannonRevolve);
   }
@@ -86,15 +88,15 @@ public class CannonFireRevolve extends CommandBase {
       if (mElapsedTime < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
-        // mRGBController.setColors(colors, 0.1);
+        mRGBController.setColors(colors, 0.1);
       } else if (mElapsedTime >= 0.5 && mElapsedTime < 1.25) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
-        // mRGBController.setColor(Color.White);
+        mRGBController.setColor(Color.White);
       } else {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
-        // mRGBController.setColor(Color.Black);
+        mRGBController.setColor(Color.Black);
         if (mRotationStep) {
           initialRotation();
         } else {

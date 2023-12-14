@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
+import frc.robot.tools.RGBController;
+import frc.robot.tools.RGBController.Color;
 
 /**
  * This Command should be the default command for the Cannon. The Cannon Subsystem consists of 
@@ -21,12 +23,12 @@ public class CannonReloading extends CommandBase {
   private double mMinFiringPressure;
   private double mMaxFiringPressure;
 
-  // private final RGBController mRGBController;
+  private final RGBController mRGBController;
 
-  public CannonReloading(Cannon cannon, SendableChooser<Constants.Environment> envirChooser/*, RGBController RGBController*/) {
+  public CannonReloading(Cannon cannon, SendableChooser<Constants.Environment> envirChooser, RGBController RGBController) {
     mCannon = cannon;
     mEnvirChooser = envirChooser;
-    // mRGBController = RGBController;
+    mRGBController = RGBController;
 
     addRequirements(mCannon);
   }
@@ -94,16 +96,16 @@ public class CannonReloading extends CommandBase {
         mCannon.setLoadingSolenoidState(true);
         mCannon.setFiringSolenoidState(false);
       }
-      // mRGBController.setColor(Color.Black);
+      mRGBController.setColor(Color.Black);
       mIsPressurized = false;
     } else if (mCannon.getFiringTankPressure() >= mMaxFiringPressure) { // Cannon at Max Firing Pressure
       mCannon.setLoadingSolenoidState(false);
       mCannon.setFiringSolenoidState(false);
-      // mRGBController.setColor(Color.Red);
+      mRGBController.setColor(Color.Red);
       mIsPressurized = true;
     } else { // Cannon is Ready to Fire
       mCannon.setFiringSolenoidState(false);
-      // mRGBController.setColor(Color.Red);
+      mRGBController.setColor(Color.Red);
       mIsPressurized = true;
     }
 
