@@ -12,7 +12,7 @@ public class Robot extends TimedRobot {
     mRobotContainer = new RobotContainer();
 
     Color[] colors = {Color.RedDim, Color.Black};
-    mRobotContainer.getRGBController().setColors(colors, 2.0);
+    mRobotContainer.getRGBController().setColors(colors, 1.0);
   }
 
   @Override
