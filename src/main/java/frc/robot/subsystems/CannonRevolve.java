@@ -14,9 +14,6 @@ public class CannonRevolve extends SubsystemBase {
   private final int TOTAL_BARRELS = 8;
   private final int CURRENT_LIMIT = 45;
 
-  private final double NORMAL_OPERATION_PERCENT = 0.75;
-  private final double NORMAL_VELOCITY_AT_PERCENT = 220.0;
-
   private final WPI_TalonSRX revolveMotor = new WPI_TalonSRX(Constants.CANNON_REVOLVE_MOTOR);
   private final DigitalInput revolveLimitSwitch = new DigitalInput(Constants.CANNON_REVOLVE_LIMIT_SWITCH);
   

@@ -74,7 +74,6 @@ public class CannonRevolveSpinVelocity extends CommandBase {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
-        System.out.println("end variable set to true");
       } else {
         mCannonRevolve.setVelocity(-mVelocity, false);
       }
@@ -86,7 +85,6 @@ public class CannonRevolveSpinVelocity extends CommandBase {
     mCannonRevolve.setPercentOutput(0.0);
     mCorrectionTimer.stop();
     mCorrectionTimer.reset();
-    System.out.println("end called");
   }
 
   @Override
