@@ -26,7 +26,7 @@ public final class Constants {
     public static final double EPSILON = 0.0001,
                                ROTATION_SPEED = 0.5,
                                MAX_ROTATION_SPEED = 1.0,
-                               MIN_FIRING_PRESSURE_INSIDE = 80.0,  // TODO Adjust Inside and Outside Pressures
+                               MIN_FIRING_PRESSURE_INSIDE = 80.0,  // Adjust Inside and Outside Pressures
                                MAX_FIRING_PRESSURE_INSIDE = 87.0,
                                MIN_FIRING_PRESSURE_OUTSIDE = 110.0,
                                MAX_FIRING_PRESSURE_OUTSIDE = 117.0,

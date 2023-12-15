@@ -58,7 +58,7 @@ public class RobotContainer {
     mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, true, mRGBController).withTimeout(8.0));
   }
 
-  public RGBController getRGBController() { // TODO Add back in and test RGB code
+  public RGBController getRGBController() {
     return mRGBController;
   }
 }
