@@ -22,7 +22,7 @@ public final class Constants {
     public static final int SRX_COUNTS_PER_REV = 4096,
                             SRX_FULL_OUTPUT = 1023,
                             SRX_BARREL_OFFSET = 155,
-                            ROTATION_VELOCITY = 350; // TODO 2) Put said number from step 1 here
+                            ROTATION_VELOCITY = 87; // TODO 2) Put said number from step 1 here
 
     public static final double EPSILON = 0.0001,
                                MAX_ROTATION_SPEED = 1.0,
