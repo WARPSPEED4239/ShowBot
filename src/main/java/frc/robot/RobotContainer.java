@@ -33,7 +33,6 @@ public class RobotContainer {
     mEnvirChooser.addOption("Outside", Constants.Environment.Outside);
     mEnvirChooser.addOption("Parade", Constants.Environment.Parade);
     SmartDashboard.putData(mEnvirChooser);
-    SmartDashboard.putNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
 
     mCannon.setDefaultCommand(new CannonReloading(mCannon, mEnvirChooser, mRGBController));
     mCannonAngleAdjust.setDefaultCommand(new CannonAimSetPercentController(mCannonAngleAdjust, mXbox));
@@ -52,10 +51,10 @@ public class RobotContainer {
     mXbox.rightBumper().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, 1).withTimeout(3.5));
     mXbox.x().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, -8).withTimeout(15.0));
     mXbox.b().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, 8).withTimeout(15.0));
-    mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED)); // TODO: 1) Find velocity where all barrels rotate by changing percent output. Record said velocity
+    mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED));
     mXbox.povRight().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, Constants.MAX_ROTATION_SPEED));
 
-    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, true, mRGBController).withTimeout(8.0));
+    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, mRGBController).withTimeout(8.0));
   }
 
   public RGBController getRGBController() {

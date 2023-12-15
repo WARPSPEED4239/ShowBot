@@ -1,13 +1,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpinVelocity extends CommandBase {
   private final CannonRevolve mCannonRevolve;
-  private final int mTargetNumberOfBarrels;
-  private int mVelocity = 87; // TODO 2) Put said number from step 1 here
+  private int mTargetNumberOfBarrels;
+  private int mVelocity;
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mWaitingForLimit;
@@ -26,20 +28,23 @@ public class CannonRevolveSpinVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    mNumberOfBarrelsAdvanced = 0;
-    mRotationStep = true;
-    mEnd = false;
     mCorrectionTimer = new Timer();
-    
+    mVelocity = Constants.ROTATION_VELOCITY;
     if (mTargetNumberOfBarrels < 0) {
       mVelocity = -mVelocity;
     }
+    mTargetNumberOfBarrels = Math.abs(mTargetNumberOfBarrels);
+    mNumberOfBarrelsAdvanced = 0;
 
+    mRotationStep = true;
+    mEnd = false;
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }
 
   @Override
   public void execute() {
+    SmartDashboard.putNumber("Target Velocity", mVelocity);
+    
     if (mRotationStep) {
       initialRotation();
     } else {
@@ -75,7 +80,7 @@ public class CannonRevolveSpinVelocity extends CommandBase {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
       } else {
-        mCannonRevolve.setVelocity(-mVelocity, false);
+        mCannonRevolve.setVelocity((int) (-mVelocity * Constants.CORRECTION_COEFFICIENT), false);
       }
     }
   }

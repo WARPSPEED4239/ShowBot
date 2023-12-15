@@ -30,10 +30,10 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.setSensorPhase(false);
     revolveMotor.configNeutralDeadband(0.001);
     
-    revolveMotor.config_kF(0, 5.5); // TODO 3) Tune this number until velocity is about that from step 2 //(NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT)
-    revolveMotor.config_kP(0,5.0); // TODO 4) Tune P by video standards
+    revolveMotor.config_kF(0, 5.5); // ~(NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT)
+    revolveMotor.config_kP(0,5.0); 
     revolveMotor.config_kI(0, 0.0);
-    revolveMotor.config_kD(0, 2.0); // TODO 5) Tune D by video standards
+    revolveMotor.config_kD(0, 2.0);
     revolveMotor.configClosedLoopPeakOutput(0, 1.0);
   }
 
@@ -60,22 +60,6 @@ public class CannonRevolve extends SubsystemBase {
 
   public boolean getRevolveLimitSwitch() {
     return !revolveLimitSwitch.get();
-  }
-
-  public void setPosition(int targetNumberOfBarrels) {
-    int ticksPerBarrel = Constants.SRX_COUNTS_PER_REV / TOTAL_BARRELS;
-    double currentBarrelPosition = ticksPerBarrel * Math.round(getPosition(false) / ticksPerBarrel);
-    int positionInSRXUnits = (int) currentBarrelPosition + (ticksPerBarrel * targetNumberOfBarrels) + Constants.SRX_BARREL_OFFSET;
-
-    revolveMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
-  }
-
-  public double getPosition(boolean inBarrels) {
-    if (inBarrels) {
-      return ((revolveMotor.getSelectedSensorPosition() - Constants.SRX_BARREL_OFFSET) * TOTAL_BARRELS / Constants.SRX_COUNTS_PER_REV);
-    } else {
-      return revolveMotor.getSelectedSensorPosition() - Constants.SRX_BARREL_OFFSET;
-    }
   }
 
   public void setVelocity(int velocityInSRXUnits, boolean inBarrelsPer100ms) {

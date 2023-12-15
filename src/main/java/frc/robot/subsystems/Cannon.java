@@ -28,9 +28,7 @@ public class Cannon extends SubsystemBase {
 
     SmartDashboard.putBoolean("Loading Solenoid State", getLoadingSolenoidState());
     SmartDashboard.putBoolean("Firing Solenoid State", getFiringSolenoidState());
-
     SmartDashboard.putNumber("Firing Tank Pressure", getFiringTankPressure());
-    SmartDashboard.putNumber("Firing Sensor Volts", getFiringSensorVolts());
   }
 
   public void setLoadingSolenoidState(boolean open) {
