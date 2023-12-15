@@ -2,12 +2,13 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpinVelocity extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private int mVelocity = 87; // TODO 2) Put said number from step 1 here
+  private int mVelocity = Constants.ROTATION_VELOCITY;
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mWaitingForLimit;

@@ -62,22 +62,6 @@ public class CannonRevolve extends SubsystemBase {
     return !revolveLimitSwitch.get();
   }
 
-  public void setPosition(int targetNumberOfBarrels) {
-    int ticksPerBarrel = Constants.SRX_COUNTS_PER_REV / TOTAL_BARRELS;
-    double currentBarrelPosition = ticksPerBarrel * Math.round(getPosition(false) / ticksPerBarrel);
-    int positionInSRXUnits = (int) currentBarrelPosition + (ticksPerBarrel * targetNumberOfBarrels) + Constants.SRX_BARREL_OFFSET;
-
-    revolveMotor.set(ControlMode.MotionMagic, positionInSRXUnits);
-  }
-
-  public double getPosition(boolean inBarrels) {
-    if (inBarrels) {
-      return ((revolveMotor.getSelectedSensorPosition() - Constants.SRX_BARREL_OFFSET) * TOTAL_BARRELS / Constants.SRX_COUNTS_PER_REV);
-    } else {
-      return revolveMotor.getSelectedSensorPosition() - Constants.SRX_BARREL_OFFSET;
-    }
-  }
-
   public void setVelocity(int velocityInSRXUnits, boolean inBarrelsPer100ms) {
     if (inBarrelsPer100ms) {
       revolveMotor.set(ControlMode.Velocity, velocityInSRXUnits * Constants.SRX_COUNTS_PER_REV / TOTAL_BARRELS);

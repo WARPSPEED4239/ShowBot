@@ -1,7 +1,6 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
@@ -21,16 +20,18 @@ public class CannonFireRevolve extends CommandBase {
   private boolean mWaitingForLimit;
   private boolean mRotationStep;
   private boolean mEnd;
-  private boolean callColors;
+  private boolean mCallIntense;
+  private boolean mCallFlash;
 
   private int mNumberOfBarrelsAdvanced;
-  private double mPercentOutput;
+  private int mVelocity;
   private double mMinFiringPressure;
   private double mStartTime;
   private double mCorrectionStartTime;
 
   private final RGBController mRGBController;
-  private final Color[] colors = {Color.Red, Color.Black};
+  private final Color[] intenseColors = {Color.Red, Color.Black};
+  private final Color[] flashColors = {Color.White, Color.Black};
 
   public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, boolean isPositive, RGBController RGBController) {
     mCannon = cannon;
@@ -46,13 +47,15 @@ public class CannonFireRevolve extends CommandBase {
     mFiringStarted = false;
     mRotationStep = true;
     mEnd = false;
+    mCallIntense = true;
+    mCallFlash = true;
+
     mNumberOfBarrelsAdvanced = 0;
     mMinFiringPressure = mCannon.getMinFiringPressure();
-    callColors = true;
+    mVelocity = Constants.ROTATION_VELOCITY;
 
-    mPercentOutput = SmartDashboard.getNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
     if (!mIsPositive) {
-      mPercentOutput = -mPercentOutput;
+      mVelocity = -mVelocity;
     }
 
     mTimer = new Timer();
@@ -60,7 +63,7 @@ public class CannonFireRevolve extends CommandBase {
     if (!mCannonRevolve.getRevolveLimitSwitch()) {
       mCorrectionNeeded = true;
       mWaitingForLimit = true;
-      mPercentOutput = -mPercentOutput;
+      mVelocity = -mVelocity;
     } else {
       mCorrectionNeeded = false;
       mWaitingForLimit = false;
@@ -90,14 +93,17 @@ public class CannonFireRevolve extends CommandBase {
       if (mElapsedTime < 0.5) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
-        if (callColors) {
-          mRGBController.setColors(colors, 0.05);
-          callColors = false;
+        if (mCallIntense) {
+          mRGBController.setColors(intenseColors, 0.05);
+          mCallIntense = false;
         }
       } else if (mElapsedTime >= 0.5 && mElapsedTime < 1.25) {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(true);
-        mRGBController.setColor(Color.White);
+        if (mCallFlash) {
+          mRGBController.setColors(flashColors, 0.5); // 0.375 <= cycleTime <= 0.75
+          mCallFlash = false;
+        }
       } else {
         mCannon.setLoadingSolenoidState(false);
         mCannon.setFiringSolenoidState(false);
@@ -112,7 +118,7 @@ public class CannonFireRevolve extends CommandBase {
   }
 
   public void initialRotation() {
-    mCannonRevolve.setPercentOutput(mPercentOutput);
+    mCannonRevolve.setVelocity(mVelocity, false);
 
     if (mWaitingForLimit) {
       if (mCannonRevolve.getRevolveLimitSwitch()) {
@@ -139,7 +145,7 @@ public class CannonFireRevolve extends CommandBase {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
       } else {
-        mCannonRevolve.setPercentOutput(-mPercentOutput);
+        mCannonRevolve.setVelocity(-mVelocity, false);
       }
     }
   }

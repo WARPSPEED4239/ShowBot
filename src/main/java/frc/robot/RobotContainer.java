@@ -33,7 +33,6 @@ public class RobotContainer {
     mEnvirChooser.addOption("Outside", Constants.Environment.Outside);
     mEnvirChooser.addOption("Parade", Constants.Environment.Parade);
     SmartDashboard.putData(mEnvirChooser);
-    SmartDashboard.putNumber("Rotation Speed (0.0 to 1.0)", Constants.ROTATION_SPEED);
 
     mCannon.setDefaultCommand(new CannonReloading(mCannon, mEnvirChooser, mRGBController));
     mCannonAngleAdjust.setDefaultCommand(new CannonAimSetPercentController(mCannonAngleAdjust, mXbox));
