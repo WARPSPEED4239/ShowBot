@@ -8,7 +8,7 @@ import frc.robot.subsystems.CannonRevolve;
 
 public class CannonRevolveSpinVelocity extends CommandBase {
   private final CannonRevolve mCannonRevolve;
-  private final int mTargetNumberOfBarrels;
+  private int mTargetNumberOfBarrels;
   private int mVelocity;
   private int mNumberOfBarrelsAdvanced;
 
@@ -33,6 +33,7 @@ public class CannonRevolveSpinVelocity extends CommandBase {
     if (mTargetNumberOfBarrels < 0) {
       mVelocity = -mVelocity;
     }
+    mTargetNumberOfBarrels = Math.abs(mTargetNumberOfBarrels);
     mNumberOfBarrelsAdvanced = 0;
 
     mRotationStep = true;
@@ -46,10 +47,8 @@ public class CannonRevolveSpinVelocity extends CommandBase {
     
     if (mRotationStep) {
       initialRotation();
-      System.out.println("ROTATION");
     } else {
       correction();
-      System.out.println("CORRECTION");
     }
   }
 
