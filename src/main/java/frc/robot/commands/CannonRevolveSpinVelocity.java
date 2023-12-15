@@ -46,8 +46,10 @@ public class CannonRevolveSpinVelocity extends CommandBase {
     
     if (mRotationStep) {
       initialRotation();
+      System.out.println("ROTATION");
     } else {
       correction();
+      System.out.println("CORRECTION");
     }
   }
 
