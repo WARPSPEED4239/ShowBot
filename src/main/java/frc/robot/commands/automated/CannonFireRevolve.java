@@ -11,9 +11,14 @@ import frc.robot.tools.RGBController.Color;
 public class CannonFireRevolve extends CommandBase {
   private final Cannon mCannon;
   private final CannonRevolve mCannonRevolve;
-  private final boolean mIsPositive;
   private Timer mTimer;
   private Timer mCorrectionTimer;
+
+  private int mNumberOfBarrelsAdvanced;
+  private int mVelocity;
+  private double mMinFiringPressure;
+  private double mStartTime;
+  private double mCorrectionStartTime;
 
   private boolean mFiringStarted;
   private boolean mCorrectionNeeded;
@@ -23,20 +28,13 @@ public class CannonFireRevolve extends CommandBase {
   private boolean mCallIntense;
   private boolean mCallFlash;
 
-  private int mNumberOfBarrelsAdvanced;
-  private int mVelocity;
-  private double mMinFiringPressure;
-  private double mStartTime;
-  private double mCorrectionStartTime;
-
   private final RGBController mRGBController;
   private final Color[] intenseColors = {Color.Red, Color.Black};
   private final Color[] flashColors = {Color.White, Color.Black};
 
-  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, boolean isPositive, RGBController RGBController) {
+  public CannonFireRevolve(Cannon cannon, CannonRevolve cannonRevolve, RGBController RGBController) {
     mCannon = cannon;
     mCannonRevolve = cannonRevolve;
-    mIsPositive = isPositive;
     mRGBController = RGBController;
 
     addRequirements(mCannon, mCannonRevolve);
@@ -44,22 +42,18 @@ public class CannonFireRevolve extends CommandBase {
 
   @Override
   public void initialize() {
+    mTimer = new Timer();
+    mCorrectionTimer = new Timer();
+    mNumberOfBarrelsAdvanced = 0;
+    mMinFiringPressure = mCannon.getMinFiringPressure();
+    mVelocity = Constants.ROTATION_VELOCITY;
+
     mFiringStarted = false;
     mRotationStep = true;
     mEnd = false;
     mCallIntense = true;
     mCallFlash = true;
 
-    mNumberOfBarrelsAdvanced = 0;
-    mMinFiringPressure = mCannon.getMinFiringPressure();
-    mVelocity = Constants.ROTATION_VELOCITY;
-
-    if (!mIsPositive) {
-      mVelocity = -mVelocity;
-    }
-
-    mTimer = new Timer();
-    mCorrectionTimer = new Timer();
     if (!mCannonRevolve.getRevolveLimitSwitch()) {
       mCorrectionNeeded = true;
       mWaitingForLimit = true;

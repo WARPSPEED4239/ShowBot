@@ -54,7 +54,7 @@ public class RobotContainer {
     mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED)); // TODO: 1) Find velocity where all barrels rotate by changing percent output. Record said velocity
     mXbox.povRight().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, Constants.MAX_ROTATION_SPEED));
 
-    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, true, mRGBController).withTimeout(8.0));
+    mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, mRGBController).withTimeout(8.0));
   }
 
   public RGBController getRGBController() {

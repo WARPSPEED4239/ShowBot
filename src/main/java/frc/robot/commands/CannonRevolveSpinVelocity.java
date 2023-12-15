@@ -8,7 +8,7 @@ import frc.robot.subsystems.CannonRevolve;
 public class CannonRevolveSpinVelocity extends CommandBase {
   private final CannonRevolve mCannonRevolve;
   private final int mTargetNumberOfBarrels;
-  private int mVelocity = Constants.ROTATION_VELOCITY;
+  private int mVelocity;
   private int mNumberOfBarrelsAdvanced;
 
   private boolean mWaitingForLimit;
@@ -27,15 +27,15 @@ public class CannonRevolveSpinVelocity extends CommandBase {
 
   @Override
   public void initialize() {
-    mNumberOfBarrelsAdvanced = 0;
-    mRotationStep = true;
-    mEnd = false;
     mCorrectionTimer = new Timer();
-    
+    mVelocity = Constants.ROTATION_VELOCITY;
     if (mTargetNumberOfBarrels < 0) {
       mVelocity = -mVelocity;
     }
+    mNumberOfBarrelsAdvanced = 0;
 
+    mRotationStep = true;
+    mEnd = false;
     mWaitingForLimit = !mCannonRevolve.getRevolveLimitSwitch();
   }
 
