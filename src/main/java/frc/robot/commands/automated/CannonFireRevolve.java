@@ -139,7 +139,7 @@ public class CannonFireRevolve extends CommandBase {
         mCannonRevolve.setPercentOutput(0.0);
         mEnd = true;
       } else {
-        mCannonRevolve.setVelocity(-mVelocity, false);
+        mCannonRevolve.setVelocity((int) (-mVelocity * Constants.CORRECTION_COEFFICIENT), false);
       }
     }
   }
