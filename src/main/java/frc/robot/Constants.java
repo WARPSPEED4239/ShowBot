@@ -21,11 +21,11 @@ public final class Constants {
 
     public static final int SRX_COUNTS_PER_REV = 4096,
                             SRX_FULL_OUTPUT = 1023,
-                            ROTATION_VELOCITY = 87; // TODO 2) Put said number from step 1 here
+                            ROTATION_VELOCITY = 110; // TODO 2) Put said number from step 1 here
 
     public static final double EPSILON = 0.0001,
                                MAX_ROTATION_SPEED = 1.0,
-                               CORRECTION_COEFFICIENT = 0.9,
+                               CORRECTION_COEFFICIENT = 0.4,
                                MIN_FIRING_PRESSURE_INSIDE = 80.0,  // Adjust Inside, Outside, and Parade Pressures
                                MAX_FIRING_PRESSURE_INSIDE = 87.0,
                                MIN_FIRING_PRESSURE_OUTSIDE = 110.0,
