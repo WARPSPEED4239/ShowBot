@@ -31,7 +31,7 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.configNeutralDeadband(0.001);
     
     revolveMotor.config_kF(0, 5.5);
-    revolveMotor.config_kP(0,5.0);
+    revolveMotor.config_kP(0, 5.0);
     revolveMotor.config_kI(0, 0.0);
     revolveMotor.config_kD(0, 2.0);
     revolveMotor.configClosedLoopPeakOutput(0, 1.0);
