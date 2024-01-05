@@ -52,6 +52,7 @@ public class RobotContainer {
     mXbox.x().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, -8).withTimeout(15.0));
     mXbox.b().onTrue(new CannonRevolveSpinVelocity(mCannonRevolve, 8).withTimeout(15.0));
     mXbox.povLeft().whileTrue(new CannonRevolveSetPercent(mCannonRevolve, -Constants.MAX_ROTATION_SPEED));
+    mXbox.povRight().whileTrue(new CannonFireRevolve(mCannon, mCannonRevolve, mRGBController).withTimeout(8.0));
 
     mXbox.a().onTrue(new CannonFireRevolve(mCannon, mCannonRevolve, mRGBController).withTimeout(8.0));
   }
