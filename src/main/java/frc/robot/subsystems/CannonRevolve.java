@@ -30,8 +30,8 @@ public class CannonRevolve extends SubsystemBase {
     revolveMotor.setSensorPhase(false);
     revolveMotor.configNeutralDeadband(0.001);
     
-    revolveMotor.config_kF(0, 5.5); // ~(NORMAL_OPERATION_PERCENT * Constants.SRX_FULL_OUTPUT) / NORMAL_VELOCITY_AT_PERCENT)
-    revolveMotor.config_kP(0,5.0); 
+    revolveMotor.config_kF(0, 5.5);
+    revolveMotor.config_kP(0, 5.0);
     revolveMotor.config_kI(0, 0.0);
     revolveMotor.config_kD(0, 2.0);
     revolveMotor.configClosedLoopPeakOutput(0, 1.0);
