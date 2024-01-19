@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.subsystems.CannonAngleAdjust;
 
-public class CannonAimSetPercentController extends CommandBase {
+public class CannonAimSetPercentController extends Command {
   private final CannonAngleAdjust mCannonAngleAdjust;
   private final CommandXboxController mXbox;
 

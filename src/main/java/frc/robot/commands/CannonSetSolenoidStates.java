@@ -1,9 +1,9 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Cannon;
 
-public class CannonSetSolenoidStates extends CommandBase {
+public class CannonSetSolenoidStates extends Command {
   private final Cannon mCannon;
   private final boolean mLoadingIsOpen;
   private final boolean mFiringIsOpen;
