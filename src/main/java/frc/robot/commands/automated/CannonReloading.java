@@ -3,7 +3,7 @@ package frc.robot.commands.automated;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.tools.RGBController;
@@ -13,7 +13,7 @@ import frc.robot.tools.RGBController.Color;
  * This Command should be the default command for the Cannon. The Cannon Subsystem consists of 
  * the firing and loading solenoids and the firing tank pressure sensor.
  */
-public class CannonReloading extends CommandBase {
+public class CannonReloading extends Command {
   private final Cannon mCannon;
   private final SendableChooser<Constants.Environment> mEnvirChooser;
   private Timer mTimer;

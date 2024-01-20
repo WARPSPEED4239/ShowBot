@@ -1,14 +1,14 @@
 package frc.robot.commands.automated;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Cannon;
 import frc.robot.subsystems.CannonRevolve;
 import frc.robot.tools.RGBController;
 import frc.robot.tools.RGBController.Color;
 
-public class CannonFireRevolve extends CommandBase {
+public class CannonFireRevolve extends Command {
   private final Cannon mCannon;
   private final CannonRevolve mCannonRevolve;
   private Timer mTimer;
