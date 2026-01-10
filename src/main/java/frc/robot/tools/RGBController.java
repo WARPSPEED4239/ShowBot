@@ -3,7 +3,9 @@ package frc.robot.tools;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix6.controls.SolidColor;
+import com.ctre.phoenix6.hardware.CANdle;
+import com.ctre.phoenix6.signals.RGBWColor;
 
 public class RGBController {
 	private CANdle mRGB;
@@ -56,36 +58,39 @@ public class RGBController {
 	}
 
 	public void setColorImpl(Color color) {
+		final int START_INDEX = 0;
+		final int END_INDEX = 399;
+
 		switch (color) {
 		case Red:
-			mRGB.setLEDs(153, 0, 0);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(153, 0, 0)));
 			break;
 		case Black:
-			mRGB.setLEDs(0, 0, 0);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(0, 0, 0)));
 			break;
 		case White:
-			mRGB.setLEDs(128, 128, 128);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(128, 128, 128)));
 			break;
 		case Green:
-			mRGB.setLEDs(0, 128, 0);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(0, 128, 0)));
 			break;
 		case Blue:
-			mRGB.setLEDs(0, 0, 128);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(0, 0, 128)));
 			break;
 		case Purple:
-			mRGB.setLEDs(255, 0, 255);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(255, 0, 255)));
 			break;
 		case RedDim:
-			mRGB.setLEDs(25, 0, 0);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(25, 0, 0)));
 			break;
 		case WhiteDim:
-			mRGB.setLEDs(25, 25, 25);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(25, 25, 25)));
 			break;
 		case GreenDim:
-			mRGB.setLEDs(0, 25, 0);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(0, 25, 0)));
 			break;
 		case PurpleDim:
-			mRGB.setLEDs(25, 0, 25);
+			mRGB.setControl(new SolidColor(START_INDEX, END_INDEX).withColor(new RGBWColor(25, 0, 25)));
 			break;
 		}
 	}
